@@ -1,3 +1,6 @@
+package ru.tests;
+
+import com.main.MainTestClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -5,29 +8,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.tests.BeforeAfterSetup;
 
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
-public class TestRunner extends BeforeAfterSetup{
-    MainTestClass mainTestClass = PageFactory.initElements(driver, MainTestClass.class);
-    WebDriver webDriver;
+public class TestRunner extends BeforeAfterSetup {
+    long max_wait_time = 6000;
+    long start_time = System.currentTimeMillis();
 
-    public WebDriver getWebDriver() {
-        return webDriver;
-    }
+        MainTestClass mainTestClass = PageFactory.initElements(driver, MainTestClass.class);
 
     @Test
-    public void getElementDisplayedOnNavigationPanel(){
-        int count = 0;
-        for(WebElement element : mainTestClass.navigationMenu){
-            if(element.isDisplayed()){
-                count++;
-            }
-        }
-        System.out.println(count + " getTitle() = " + webDriver.getTitle());
-        //   return navigationMenu.stream().filter(webElement -> webElement.isDisplayed()).peek();
-       // return count;
+    public void getElementDisplayed(){
+        mainTestClass.getElementDisplayedOnNavigationPanel();
     }
 
     @Test

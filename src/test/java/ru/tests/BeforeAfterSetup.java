@@ -1,3 +1,5 @@
+package ru.tests;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class BeforeAfterSetup {
 
     static WebDriver driver;
-    private static String driverPath = "Macintosh HD\\Пользователи\\halilovaelvira\\Загрузки\\chromedriver.exe";
+    // Note - don't use ".exe" for MAC !!!
+    private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver 2";
     private static String website = "https://dodopizza.ru/peterburg";
 
     @BeforeClass
