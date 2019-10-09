@@ -13,7 +13,8 @@ public class BeforeAfterSetup {
 
     static WebDriver driver;
     // Note - don't use ".exe" for MAC !!!
-    private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
+    // private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
+    private static String driverPath = "C:/Users/Public/chromedriver.exe";
   //  private static String driverPath = "/src/chromedriver 2";
     private static String website = "https://dodopizza.ru/peterburg";
 
