@@ -4,24 +4,26 @@ import com.main.MainTestClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.tests.BeforeAfterSetup;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 public class TestRunner extends BeforeAfterSetup {
     long max_wait_time = 6000;
     long start_time = System.currentTimeMillis();
 
-        MainTestClass mainTestClass = PageFactory.initElements(driver, MainTestClass.class);
+    MainTestClass mainTestClass = PageFactory.initElements(BeforeAfterSetup.driver, MainTestClass.class);
 
     @Test
-    public void getElementDisplayed(){
-        mainTestClass.getElementDisplayedOnNavigationPanel();
+    public void clickOnElemenet() {
+        PageFactory.initElements(driver, MainTestClass.class).clickOnItem();
+    }
+
+    @Test
+    public void getElementDisplayed() {
+     //   mainTestClass.getElementDisplayedOnNavigationPanel();
     }
 
     @Test

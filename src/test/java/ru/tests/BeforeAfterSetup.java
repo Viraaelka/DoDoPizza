@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BeforeAfterSetup {
 
-    static WebDriver driver;
+    public static WebDriver driver;
     // Note - don't use ".exe" for MAC !!!
     private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
   //  private static String driverPath = "/src/chromedriver 2";

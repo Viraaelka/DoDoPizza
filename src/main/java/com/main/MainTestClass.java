@@ -12,7 +12,7 @@ public class MainTestClass{
     public MainTestClass(WebDriver webdriver){
         this.webdriver = webdriver;
     }
-    public List<WebElement> navigationMenu = webdriver.findElements(By.xpath("//li[@class='navigation__item']"));
+/*   public List<WebElement> navigationMenu = webdriver.findElements(By.xpath("//li[@class='navigation__item']"));
 
     public void getElementDisplayedOnNavigationPanel(){
         int count = 0;
@@ -24,5 +24,9 @@ public class MainTestClass{
         System.out.println(count + " getTitle() = " + webdriver.getTitle());
         //   return navigationMenu.stream().filter(webElement -> webElement.isDisplayed()).peek();
         // return count;
+    }
+    */
+    public void clickOnItem(){
+        webdriver.findElement(By.xpath("(//a[@class=' navigation__link link'])[1]")).click();
     }
 }
