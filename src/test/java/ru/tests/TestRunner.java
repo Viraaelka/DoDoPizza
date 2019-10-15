@@ -19,15 +19,18 @@ public class TestRunner extends BeforeAfterSetup {
 
     MainTestClass mainTestClass = PageFactory.initElements(BeforeAfterSetup.driver, MainTestClass.class);
 
-    @Test
-    public void clickOnElemenet() {
-        PageFactory.initElements(driver, MainTestClass.class).clickOnItem();
-    }
+    // public void clickOnElemenet() {PageFactory.initElements(driver, MainTestClass.class).clickOnItem();}
 
     @Test
     public void getElementDisplayed() {
-     //   mainTestClass.getElementDisplayedOnNavigationPanel();
+        //   mainTestClass.getElementDisplayedOnNavigationPanel();
         Assert.assertEquals(mainTestClass.findAmountOfElements(mainTestClass.getNavigationMenuList()), navigaionMenuElementsNumber);
+    }
+    @Test
+    public void choosePizzaWindow(){
+      //  if (mainTestClass.chooseButton.isDisplayed())
+           mainTestClass.chooseButton.click();
+       Assert.assertEquals("Пепперони Фреш с перцем", mainTestClass.titleInChosenWindow.getText());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package ru.tests;
 
+import io.cucumber.java.en.When;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class BeforeAfterSetup {
         driver.get(website);
     }
 
-    @Before
+    @When("^Going to the Home page?")
     public void goToDodoPage(){
         driver.get(website);
     }
