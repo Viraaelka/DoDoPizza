@@ -12,6 +12,7 @@ import ru.tests.BeforeAfterSetup;
         tags = {"@test"}
 )
 
+// class name should end with the word "Test" otherwise it would be launched!
 public class CucumberTest {
 
     public static void beforeSetup(){
