@@ -21,19 +21,19 @@ public class TestRunner extends BeforeAfterSetup {
 
     // public void clickOnElemenet() {PageFactory.initElements(driver, MainTestClass.class).clickOnItem();}
 
-    @Test
+   // @Test
     public void getElementDisplayed() {
         //   mainTestClass.getElementDisplayedOnNavigationPanel();
         Assert.assertEquals(mainTestClass.findAmountOfElements(mainTestClass.getNavigationMenuList()), navigaionMenuElementsNumber);
     }
-    @Test
+   // @Test
     public void choosePizzaWindow(){
       //  if (mainTestClass.chooseButton.isDisplayed())
            mainTestClass.chooseButton.click();
        Assert.assertEquals("Пепперони Фреш с перцем", mainTestClass.titleInChosenWindow.getText());
     }
 
-    @Test
+  //  @Test
     public void someSimpleTest() {
      /*   driver.get("http://internetka.in.ua");
 

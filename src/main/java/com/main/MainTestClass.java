@@ -1,5 +1,6 @@
 package com.main;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class MainTestClass{
@@ -49,6 +51,7 @@ public class MainTestClass{
             throw new NoSuchElementException("The list of elements is empty " + array.toString());
         return array.size();
     }
+
 
     public void clickOnItem(WebElement element){
         if(element.isDisplayed())

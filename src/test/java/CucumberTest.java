@@ -1,25 +1,24 @@
-package ru.tests;
-
-import cucumber.api.CucumberOptions;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import io.cucumber.java.Before;
+import io.cucumber.java.After;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
-/*
+import ru.tests.BeforeAfterSetup;
+
 @RunWith(Cucumber.class) //inherit Cucumber class from io.cucumber.junit.Cucumber -> "<artifactId>cucumber-java</artifactId>"
 @CucumberOptions(monochrome = true,
-        features = {"src/test/ru.tests/features"},
-        glue = {"ru.tests, com.main"},
+        features = {"src/test/java/ru/tests/features"},
+        glue = {"com.main"},
         tags = {"@test"}
 )
+
 public class CucumberTest {
-    @BeforeClass
+
     public static void beforeSetup(){
         new BeforeAfterSetup().setUp();
     }
-    @AfterClass
+
     public static void afterClassAction(){
         new BeforeAfterSetup().tearDown();
     }
-}*/
+}
