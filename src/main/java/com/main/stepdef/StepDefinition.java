@@ -3,7 +3,7 @@ package com.main.stepdef;
 import com.main.MainTestClass;
 import com.main.exceptions.AutotestException;
 import com.main.hooks.Hooks;
-import gherkin.ast.DataTable;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -34,7 +34,10 @@ public class StepDefinition {
     @And("^clicking on (?:element |checkbox|) <(.?)>$")
     public void clickOn(DataTable elementName, WebElement element){
      //   CHECK HOW TO GET ARRAYLIST FROM DATATABLE
-    //    List<String> elementList = elementName.
+    List<String> elementList = elementName.asList();
+    for(String el : elementList){
+        System.out.println(el);
+    }
         if(!element.isDisplayed())
             throw new AutotestException(String.format("Elemenet %s was not displayed", element.getText()));
         element.click();

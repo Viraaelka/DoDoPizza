@@ -24,7 +24,7 @@ public class MainTestClass{
     }
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
-    @FindBy (xpath = "(//div[@id='pizzas']//button[1]")
+    @FindBy (xpath = "//div[@id='pizzas']//button[contains(text(), 'Пепперони')]")
     public WebElement chooseButton;
 
     @FindBy (xpath = "//div[@class='popup__dialog-inner']/descendant::span[contains(@class, ProductCardNameValue)][1]")
