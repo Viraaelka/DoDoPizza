@@ -11,14 +11,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class BeforeAfterSetup {
-
+    /**
+     * These two classes - BeforeAfterSetup and TestRunner could be used for Unit testing with no Maven usage
+     *
+     */
     public static WebDriver driver;
-    // Note - don't use ".exe" for MAC !!!
-   //  private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
     private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
     private static String website = "https://dodopizza.ru/peterburg";
 
-    /*
+
     @BeforeClass
     public static void setUp(){
         System.setProperty("webdriver.chrome.driver", driverPath);
@@ -36,5 +37,5 @@ public class BeforeAfterSetup {
     public static void tearDown(){
         driver.quit();
     }
-    */
+
 }
