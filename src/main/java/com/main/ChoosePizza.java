@@ -6,9 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ChoosePizza extends MainTestClass {
-
-    private WebDriver webdriver = com.config.PageFactory.getDriver();
+public class ChoosePizza { // extends MainTestClass {
 
  /*   public ChoosePizza(WebDriver webdriver) {
         super(webdriver);
