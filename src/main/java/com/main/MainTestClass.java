@@ -1,7 +1,9 @@
 package com.main;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,11 +23,14 @@ public class MainTestClass{
     }
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
-    @FindBy (xpath = "(//button[text()='Выбрать'])[1]")
+    @FindBy (xpath = "(//div[@id='pizzas']//button[1]")
     public WebElement chooseButton;
 
     @FindBy (xpath = "//div[@class='popup__dialog-inner']/descendant::span[contains(@class, ProductCardNameValue)][1]")
     public WebElement titleInChosenWindow;
+
+
+
 
     /*  public void getElementDisplayedOnNavigationPanel(){
           int count = 0;
@@ -59,4 +64,8 @@ public class MainTestClass{
         else
             throw new NoSuchElementException("Unable to find and click on the element " + element.getText());
     }
+
+    @FindBy(xpath = "//div[@class='popup__dialog-inner']//following-sibling::span")
+    public WebElement pizzaTitle;
+
 }
