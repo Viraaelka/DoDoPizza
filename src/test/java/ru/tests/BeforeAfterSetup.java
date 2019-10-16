@@ -18,8 +18,9 @@ public class BeforeAfterSetup {
     private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
     private static String website = "https://dodopizza.ru/peterburg";
 
-  //  @BeforeClass
-    public void setUp(){
+    /*
+    @BeforeClass
+    public static void setUp(){
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -31,8 +32,9 @@ public class BeforeAfterSetup {
         driver.get(website);
     }
 
-  //  @AfterClass
-    public void tearDown(){
+    @AfterClass
+    public static void tearDown(){
         driver.quit();
     }
+    */
 }

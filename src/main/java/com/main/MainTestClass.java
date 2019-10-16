@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.json.JsonOutput;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
@@ -16,10 +17,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class MainTestClass{
-    private WebDriver webdriver;
+    private WebDriver webdriver = com.config.PageFactory.getDriver();
 
-    public MainTestClass(WebDriver webdriver){
-        this.webdriver = webdriver;
+    public MainTestClass(){
+        PageFactory.initElements(this.webdriver, this);
     }
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
@@ -45,7 +46,7 @@ public class MainTestClass{
       }
       */
     public List<WebElement> getNavigationMenuList(){
-        for(WebElement elem : webdriver.findElements(By.xpath("//ul[@class='navigation__list']/descendant::a"))){
+       for(WebElement elem : webdriver.findElements(By.xpath("//ul[@class='navigation__list']/descendant::a"))){
             System.out.println(elem.getText());
         }
         return webdriver.findElements(By.xpath("//ul[@class='navigation__list']/descendant::a"));
