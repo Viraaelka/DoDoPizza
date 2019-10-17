@@ -26,6 +26,9 @@ public class MainTestClass{
     @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::button")
     public WebElement applyPromoButton;
 
+    @FindBy(xpath = "")
+    public WebElement promoPopupMessage;
+
 
 
     /*  public void getElementDisplayedOnNavigationPanel(){

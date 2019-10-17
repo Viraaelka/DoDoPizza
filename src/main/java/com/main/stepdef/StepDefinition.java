@@ -37,37 +37,47 @@ public class StepDefinition {
     } */
 
     @And("^clicking on (?:element |checkbox|) <(.?)>$")
-    public void clickOn(DataTable elementName, WebElement element){
-     //   CHECK HOW TO GET ARRAYLIST FROM DATATABLE
-    //    List<String> elementList = elementName.
-        if(!element.isDisplayed())
+    public void clickOn(DataTable elementName, WebElement element) {
+        //   CHECK HOW TO GET ARRAYLIST FROM DATATABLE
+        //    List<String> elementList = elementName.
+        if (!element.isDisplayed())
             throw new AutotestException(String.format("Elemenet %s was not displayed", element.getText()));
         element.click();
     }
 
     @And("^checking that$")
-    public void titleCheck(){
+    public void titleCheck() {
         mainTestClass.chooseButton.click();
         // How to check that the page is opened?
-        if(mainTestClass.pizzaTitle.isDisplayed())
+        if (mainTestClass.pizzaTitle.isDisplayed())
             Assert.assertEquals("Пепперони Фреш с перцем", mainTestClass.pizzaTitle.getText());
     }
+
     @When("applying a code to get a sale for pizza order")
-    public void applyPromo(DataTable dataTable){
+    public void applyPromo(DataTable dataTable) {
         List<String> promoList = dataTable.asList();
-        if(promoList.size() < 1)
+        if (promoList.size() < 1)
             throw new AutotestException("No Giveaway code has been found");
-        else if(promoList.size() == 1) {
+        else if (promoList.size() == 1) {
             if (isElementVisible(mainTestClass.promocodeInput) && isElementVisible(mainTestClass.applyPromoButton)) {
                 mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
                 mainTestClass.applyPromoButton.click();
+                Assert.assertTrue("Promocode is applied", mainTestClass.promoPopupMessage.getText().equals(""));
+                System.out.println("Promocode is applied"); // Log
             }
-       //     com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::input")).sendKeys(promoList.iterator().next().toString());
-        //    com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::button")).click();
+            //     com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::input")).sendKeys(promoList.iterator().next().toString());
+            //    com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::button")).click();
 
         }
         if (promoList.size() > 1) {
-
+            promoList.forEach(s ->{
+            try {
+                mainTestClass.promocodeInput.sendKeys(s);
+                mainTestClass.applyPromoButton.click();
+            } catch (NoSuchElementException e) {
+                throw new AutotestException("No such elements");
+            }
+            });
            /* int count = promoList.size();
             do{
                 if (isElementVisible(mainTestClass.promocodeInput) && isElementVisible(mainTestClass.applyPromoButton)){
@@ -79,11 +89,15 @@ public class StepDefinition {
         }
 
     }
-    public boolean isElementVisible(WebElement element){
-        try{
+    public boolean isSuccessfullyClicked(){
+        return true;
+    }
+
+    public boolean isElementVisible(WebElement element) {
+        try {
             new WebDriverWait(com.config.PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(element));
 
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
         return true;
