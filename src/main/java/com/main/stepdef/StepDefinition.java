@@ -1,5 +1,6 @@
 package com.main.stepdef;
 
+import com.config.PageFactory;
 import com.main.MainTestClass;
 import com.main.exceptions.AutotestException;
 import com.main.hooks.Hooks;
@@ -12,7 +13,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class StepDefinition {
-   // private WebDriver driver;
-    MainTestClass mainTestClass = PageFactory.initElements(Hooks.driver, MainTestClass.class);
+
+    MainTestClass mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainTestClass.class);
 
     @Given("^some map of values$")
     public void givenMap(Map<String, Integer> map) {
@@ -58,10 +58,10 @@ public class StepDefinition {
         if(promoList.size() < 1)
             throw new AutotestException("No Giveaway code has been found");
         else if(promoList.size() == 1) {
-           // if (isElementVisible(mainTestClass.promocodeInput) && isElementVisible(mainTestClass.applyPromoButton)) {
+            if (isElementVisible(mainTestClass.promocodeInput) && isElementVisible(mainTestClass.applyPromoButton)) {
                 mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
                 mainTestClass.applyPromoButton.click();
-         //   }
+            }
        //     com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::input")).sendKeys(promoList.iterator().next().toString());
         //    com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::button")).click();
 
@@ -81,9 +81,8 @@ public class StepDefinition {
     }
     public boolean isElementVisible(WebElement element){
         try{
-          //  new WebDriverWait(com.config.PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(element));
-            if(!element.isDisplayed())
-                new Actions(com.config.PageFactory.getDriver()).moveToElement(element).build();
+            new WebDriverWait(com.config.PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(element));
+
         }catch (NoSuchElementException e){
             return false;
         }

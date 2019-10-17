@@ -11,9 +11,6 @@ import java.util.NoSuchElementException;
 public class MainTestClass{
     private WebDriver webdriver = com.config.PageFactory.getDriver();
 
-    public MainTestClass(WebDriver driver){
-        this.webdriver = driver;
-    }
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
     @FindBy (xpath = "(//div[@id='pizzas']//button[1]")
