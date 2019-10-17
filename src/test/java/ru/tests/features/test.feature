@@ -7,4 +7,5 @@ Scenario: Going to the Home page
       |a|1|
       |b|2|
       |c|3|
-  And checking that
+  When applying a code to get a sale for pizza order
+    |100000000|

@@ -1,26 +1,18 @@
 package com.main;
 
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.json.JsonOutput;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class MainTestClass{
     private WebDriver webdriver = com.config.PageFactory.getDriver();
 
-    public MainTestClass(){
-        PageFactory.initElements(this.webdriver, this);
+    public MainTestClass(WebDriver driver){
+        this.webdriver = driver;
     }
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
@@ -30,6 +22,12 @@ public class MainTestClass{
     @FindBy (xpath = "//div[@class='popup__dialog-inner']/descendant::span[contains(@class, ProductCardNameValue)][1]")
     public WebElement titleInChosenWindow;
 
+/* ============================ Applying promocode ==========================================*/
+    @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::input")
+    public WebElement promocodeInput;
+
+    @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::button")
+    public WebElement applyPromoButton;
 
 
 

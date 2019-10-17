@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 public class PageFactory {
     private static WebDriver driver;
     // Note - don't use ".exe" for MAC !!!
-    private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
-    // private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
+  //  private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
+     private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
     public static String website = "https://dodopizza.ru/peterburg";
 
     public void setUp() {
