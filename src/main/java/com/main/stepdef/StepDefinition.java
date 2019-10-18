@@ -4,12 +4,14 @@ import com.config.PageFactory;
 import com.main.MainTestClass;
 import com.main.exceptions.AutotestException;
 import com.main.hooks.Hooks;
+import com.oracle.tools.packager.windows.WinExeBundler;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -59,7 +61,7 @@ public class StepDefinition {
         if (promoList.size() < 1)
             throw new AutotestException("No Giveaway code has been found");
         else if (promoList.size() == 1) {
-            if (isElementVisible(mainTestClass.promocodeInput) && isElementVisible(mainTestClass.applyPromoButton)) {
+            if (isElementVisible(mainTestClass.promocodeInput, 3) && isElementVisible(mainTestClass.applyPromoButton, 3)) {
                 mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
                 mainTestClass.applyPromoButton.click();
                 Assert.assertTrue("Promocode is applied", mainTestClass.promoPopupMessage.getText().equals(""));
@@ -70,13 +72,13 @@ public class StepDefinition {
 
         }
         if (promoList.size() > 1) {
-            promoList.forEach(s ->{
-            try {
-                mainTestClass.promocodeInput.sendKeys(s);
-                mainTestClass.applyPromoButton.click();
-            } catch (NoSuchElementException e) {
-                throw new AutotestException("No such elements");
-            }
+            promoList.forEach(s -> {
+                try {
+                    mainTestClass.promocodeInput.sendKeys(s);
+                    mainTestClass.applyPromoButton.click();
+                } catch (NoSuchElementException e) {
+                    throw new AutotestException("No such elements");
+                }
             });
            /* int count = promoList.size();
             do{
@@ -89,17 +91,24 @@ public class StepDefinition {
         }
 
     }
-    public boolean isSuccessfullyClicked(){
-        return true;
-    }
 
-    public boolean isElementVisible(WebElement element) {
+    public boolean checkIfElementIsPresent(WebElement element, int time) {
         try {
-            new WebDriverWait(com.config.PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(element));
+            new WebDriverWait(com.config.PageFactory.getDriver(), time)
+                    //  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(., '" + text + "')]")));
+                    .until(ExpectedConditions.visibilityOf(element));
+            return true;
 
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | TimeoutException e) {
+            System.out.println("Element with text .. is not located on the page"); // Log
             return false;
         }
-        return true;
+    }
+
+    public void checkIfElementPresent(DataTable dataTable) {
+        Map<String, String> checkingMap = dataTable.asMap(String.class, String.class);
+        checkingMap.forEach((k,v) -> {
+            if (k instanceof MainTestClass)
+        });
     }
 }
