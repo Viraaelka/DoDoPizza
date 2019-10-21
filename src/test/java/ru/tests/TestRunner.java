@@ -1,15 +1,8 @@
 package ru.tests;
 
-import com.main.MainTestClass;
+import com.main.pages.MainTestClass;
 import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.Set;
 
 public class TestRunner extends BeforeAfterSetup {
     long max_wait_time = 6000;

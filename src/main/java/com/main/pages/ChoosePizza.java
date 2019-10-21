@@ -1,4 +1,4 @@
-package com.main;
+package com.main.pages;
 
 import io.cucumber.java.en.And;
 import org.junit.Assert;

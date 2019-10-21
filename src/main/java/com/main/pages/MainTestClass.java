@@ -1,4 +1,4 @@
-package com.main;
+package com.main.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MainTestClass{
+public class MainTestClass extends WrapperPage{
     private WebDriver webdriver = com.config.PageFactory.getDriver();
 
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";

@@ -1,16 +1,14 @@
 package com.main.stepdef;
 
 import com.config.PageFactory;
-import com.main.MainTestClass;
+import com.main.pages.MainTestClass;
 import com.main.exceptions.AutotestException;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
