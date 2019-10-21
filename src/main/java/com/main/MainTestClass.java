@@ -23,10 +23,10 @@ public class MainTestClass{
     @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::input")
     public WebElement promocodeInput;
 
-    @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::button")
+    @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::button[text()='Применить']")
     public WebElement applyPromoButton;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//div[@class = 'tooltip-base__content']")
     public WebElement promoPopupMessage;
 
 

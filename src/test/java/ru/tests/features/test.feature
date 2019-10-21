@@ -8,4 +8,5 @@ Scenario: Going to the Home page
       |b|2|
       |c|3|
   When applying a code to get a sale for pizza order
-    |100000000|
+   |10000|
+   |269789     |

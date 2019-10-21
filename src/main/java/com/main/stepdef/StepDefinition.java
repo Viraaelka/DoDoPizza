@@ -3,8 +3,6 @@ package com.main.stepdef;
 import com.config.PageFactory;
 import com.main.MainTestClass;
 import com.main.exceptions.AutotestException;
-import com.main.hooks.Hooks;
-import com.oracle.tools.packager.windows.WinExeBundler;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -58,14 +56,23 @@ public class StepDefinition {
     @When("applying a code to get a sale for pizza order")
     public void applyPromo(DataTable dataTable) {
         List<String> promoList = dataTable.asList();
-        if (promoList.size() < 1)
+        if (promoList.size() < 1) {
             throw new AutotestException("No Giveaway code has been found");
+        }
         else if (promoList.size() == 1) {
-            if (isElementVisible(mainTestClass.promocodeInput, 3) && isElementVisible(mainTestClass.applyPromoButton, 3)) {
+            if (checkIfElementIsPresent(mainTestClass.promocodeInput, 3) && checkIfElementIsPresent(mainTestClass.applyPromoButton, 3)) {
+            if (promoList.get(0).equals("")) {
                 mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
                 mainTestClass.applyPromoButton.click();
-                Assert.assertTrue("Promocode is applied", mainTestClass.promoPopupMessage.getText().equals(""));
-                System.out.println("Promocode is applied"); // Log
+                checkIfElementIsPresent(mainTestClass.promoPopupMessage, 3);
+                Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Используйте цифры и латинские буквы");
+            } else {
+                    mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
+                    mainTestClass.applyPromoButton.click();
+                    //   Assert.assertTrue("Promocode is applied", mainTestClass.promoPopupMessage.getText().equals(""));
+                    System.out.println("Promocode is applied"); // Log
+                Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Промокод не найден. Попробуйте другой");
+                }
             }
             //     com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::input")).sendKeys(promoList.iterator().next().toString());
             //    com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::button")).click();
@@ -74,8 +81,14 @@ public class StepDefinition {
         if (promoList.size() > 1) {
             promoList.forEach(s -> {
                 try {
-                    mainTestClass.promocodeInput.sendKeys(s);
-                    mainTestClass.applyPromoButton.click();
+                       mainTestClass.promocodeInput.sendKeys(s);
+                       mainTestClass.applyPromoButton.click();
+                       new WebDriverWait(PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(mainTestClass.promoPopupMessage));
+                    if(s.equals("")) {
+                        Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Используйте цифры и латинские буквы");
+                    } else{
+                        Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Промокод не найден. Попробуйте другой");
+                    }
                 } catch (NoSuchElementException e) {
                     throw new AutotestException("No such elements");
                 }
@@ -89,11 +102,12 @@ public class StepDefinition {
                 count--;
             }while(count > 0); */
         }
-
     }
 
     public boolean checkIfElementIsPresent(WebElement element, int time) {
         try {
+            Actions actions = new Actions(PageFactory.getDriver());
+            actions.moveToElement(element).click().build().perform();
             new WebDriverWait(com.config.PageFactory.getDriver(), time)
                     //  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(., '" + text + "')]")));
                     .until(ExpectedConditions.visibilityOf(element));
@@ -107,9 +121,10 @@ public class StepDefinition {
 
     public void checkIfElementPresent(DataTable dataTable) {
         Map<String, String> checkingMap = dataTable.asMap(String.class, String.class);
-        checkingMap.forEach((k,v) -> {
+     /*   checkingMap.forEach((k,v) -> {
             if (k instanceof MainTestClass)
 
-        });
+        }); */
     }
 }
+// https://stackoverflow.com/questions/44912203/selenium-web-driver-java-element-is-not-clickable-at-point-x-y-other-elem
