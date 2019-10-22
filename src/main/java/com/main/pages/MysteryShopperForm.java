@@ -4,66 +4,63 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MysteryShopperForm {
-    @ElementTitle("Страна - условие")
+    //todo find all xpath ways!
+  //  @ElementTitle("Страна - условие")
     @FindBy(xpath = "")
     public WebElement countryText;
 
-    @ElementTitle("Страна")
+ //   @ElementTitle("Страна")
     @FindBy(xpath = "")
     public WebElement countryInputText;
 
-    @ElementTitle("Город - условие")
+ //   @ElementTitle("Город - условие")
     @FindBy(xpath = "")
     public WebElement cityText;
 
-    @ElementTitle("Город")
+ //   @ElementTitle("Город")
     @FindBy(xpath = "")
     public WebElement cityInputText;
 
-    @ElementTitle("Адрес пиццерии")
+  //  @ElementTitle("Адрес пиццерии")
     @FindBy(xpath = "")
     public WebElement addressText;
 
-    @ElementTitle("Имя")
+  //  @ElementTitle("Имя")
     @FindBy(xpath = "")
     public WebElement nameText;
 
-    @ElementTitle("Дата рождения")
+   // @ElementTitle("Дата рождения")
     @FindBy(xpath = "")
     public WebElement birthdayText;
 
-    @ElementTitle("Телефон")
+  //  @ElementTitle("Телефон")
     @FindBy(xpath = "")
     public WebElement phoneText;
 
-    @ElementTitle("Вконтакте")
+ //   @ElementTitle("Вконтакте")
     @FindBy(xpath = "")
     public WebElement vkText;
 
-    @ElementTitle("Вы или ваши знакомые работали в Додо Пицце?")
+ //   @ElementTitle("Вы или ваши знакомые работали в Додо Пицце?")
     @FindBy(xpath = "")
-    public WebElement vkText;
+    public WebElement askQuestionText;
 
-    @ElementTitle("Нет")
+ //   @ElementTitle("Нет")
     @FindBy(xpath = "")
     public WebElement noReplyText;
 
-    @ElementTitle("Да, раньше")
+ //   @ElementTitle("Да, раньше")
     @FindBy(xpath = "")
     public WebElement yepReplyText;
 
-    @ElementTitle("Да, прямо сейчас")
+ //   @ElementTitle("Да, прямо сейчас")
     @FindBy(xpath = "")
     public WebElement YepRightNowText;
 
 
-    @ElementTitle("Что вы готовы проверять?")
+  //  @ElementTitle("Что вы готовы проверять?")
     @FindBy(xpath = "")
     public WebElement question_Text;
-
-
-
-
 
 }
 

@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class StepDefinition {
+public class MainClassSteps {
 
     MainTestClass mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainTestClass.class);
 
@@ -51,7 +52,7 @@ public class StepDefinition {
             Assert.assertEquals("Пепперони Фреш с перцем", mainTestClass.pizzaTitle.getText());
     }
 
-    @When("applying a code to get a sale for pizza order")
+    @When("^applying a code to get a sale for pizza order$")
     public void applyPromo(DataTable dataTable) {
         List<String> promoList = dataTable.asList();
         if (promoList.size() < 1) {
@@ -102,10 +103,26 @@ public class StepDefinition {
         }
     }
 
+    @And("^going to the page \"Mistery Shopper\" to fill up a form for a free pizza$")
+    public void goToFillUpMistyryForm(){
+        if (checkIfElementIsPresent(mainTestClass.fillUpMistyrShopperButton, 3))
+           mainTestClass.fillUpMistyrShopperButton.click();
+
+        // TODO input windowHandles to go to control page
+        // todo: refactor page to make them fully the same as URLs
+
+        Assert.assertEquals("Texts do not fully match", PageFactory.getDriver().findElement(By.xpath("//h1")).getText(), "КАК НАСЧЕТ БЕСПЛАТНОЙ ПИЦЦЫ?");
+    }
+    @And("^turning off a cookie pop-up message$")
+    public void turnOffCokies(){
+        mainTestClass.turnOffCokies();
+        // todo: implement method to turn off cookies
+    }
+
     public boolean checkIfElementIsPresent(WebElement element, int time) {
         try {
             Actions actions = new Actions(PageFactory.getDriver());
-            actions.moveToElement(element).click().build().perform();
+            actions.moveToElement(element).build().perform();
             new WebDriverWait(com.config.PageFactory.getDriver(), time)
                     //  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(., '" + text + "')]")));
                     .until(ExpectedConditions.visibilityOf(element));
@@ -124,5 +141,7 @@ public class StepDefinition {
 
         }); */
     }
+
+
 }
 // https://stackoverflow.com/questions/44912203/selenium-web-driver-java-element-is-not-clickable-at-point-x-y-other-elem

@@ -29,6 +29,8 @@ public class MainTestClass extends WrapperPage{
     @FindBy(xpath = "//div[@class = 'tooltip-base__content']")
     public WebElement promoPopupMessage;
 
+    @FindBy(xpath = "//div[@class='secret-buyer-section']//a[text()='Заполнить анкету']")
+    public WebElement fillUpMistyrShopperButton;
 
 
     /*  public void getElementDisplayedOnNavigationPanel(){
