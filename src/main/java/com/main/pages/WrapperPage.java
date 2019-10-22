@@ -6,9 +6,8 @@ import org.openqa.selenium.By;
 
 public class WrapperPage {
 
-
-
     public void turnOffCokies(){
-        PageFactory.getDriver().findElement(By.xpath("")).click();
+        PageFactory.getDriver().findElement(By.xpath("//div[@class='cookie-policy']//button")).click();
     }
+
 }

@@ -10,14 +10,17 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class MainClassSteps {
 
@@ -57,20 +60,19 @@ public class MainClassSteps {
         List<String> promoList = dataTable.asList();
         if (promoList.size() < 1) {
             throw new AutotestException("No Giveaway code has been found");
-        }
-        else if (promoList.size() == 1) {
+        } else if (promoList.size() == 1) {
             if (checkIfElementIsPresent(mainTestClass.promocodeInput, 3) && checkIfElementIsPresent(mainTestClass.applyPromoButton, 3)) {
-            if (promoList.get(0).equals("")) {
-                mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
-                mainTestClass.applyPromoButton.click();
-                checkIfElementIsPresent(mainTestClass.promoPopupMessage, 3);
-                Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Используйте цифры и латинские буквы");
-            } else {
+                if (promoList.get(0).equals("")) {
+                    mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
+                    mainTestClass.applyPromoButton.click();
+                    checkIfElementIsPresent(mainTestClass.promoPopupMessage, 3);
+                    Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Используйте цифры и латинские буквы");
+                } else {
                     mainTestClass.promocodeInput.sendKeys(promoList.iterator().next().toString());
                     mainTestClass.applyPromoButton.click();
                     //   Assert.assertTrue("Promocode is applied", mainTestClass.promoPopupMessage.getText().equals(""));
                     System.out.println("Promocode is applied"); // Log
-                Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Промокод не найден. Попробуйте другой");
+                    Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Промокод не найден. Попробуйте другой");
                 }
             }
             //     com.config.PageFactory.getDriver().findElement(By.xpath("//div[@class = 'menu__promocode']/descendant-or-self::input")).sendKeys(promoList.iterator().next().toString());
@@ -80,12 +82,12 @@ public class MainClassSteps {
         if (promoList.size() > 1) {
             promoList.forEach(s -> {
                 try {
-                       mainTestClass.promocodeInput.sendKeys(s);
-                       mainTestClass.applyPromoButton.click();
-                       new WebDriverWait(PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(mainTestClass.promoPopupMessage));
-                    if(s.equals("")) {
+                    mainTestClass.promocodeInput.sendKeys(s);
+                    mainTestClass.applyPromoButton.click();
+                    new WebDriverWait(PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(mainTestClass.promoPopupMessage));
+                    if (s.equals("")) {
                         Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Используйте цифры и латинские буквы");
-                    } else{
+                    } else {
                         Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Промокод не найден. Попробуйте другой");
                     }
                 } catch (NoSuchElementException e) {
@@ -104,19 +106,28 @@ public class MainClassSteps {
     }
 
     @And("^going to the page \"Mistery Shopper\" to fill up a form for a free pizza$")
-    public void goToFillUpMistyryForm(){
+    public void goToFillUpMistyryForm() {
+
+
+
+        String homePage = PageFactory.getDriver().getWindowHandle();
+        final Set<String> oldWindowSet = PageFactory.getDriver().getWindowHandles();
         if (checkIfElementIsPresent(mainTestClass.fillUpMistyrShopperButton, 3))
-           mainTestClass.fillUpMistyrShopperButton.click();
-
-        // TODO input windowHandles to go to control page
-        // todo: refactor page to make them fully the same as URLs
-
-        Assert.assertEquals("Texts do not fully match", PageFactory.getDriver().findElement(By.xpath("//h1")).getText(), "КАК НАСЧЕТ БЕСПЛАТНОЙ ПИЦЦЫ?");
+            mainTestClass.fillUpMistyrShopperButton.click();
+        String newWindow = (new WebDriverWait(PageFactory.getDriver(), 5)).until(new ExpectedCondition<String>(){
+            public String apply (WebDriver driver) {
+                Set<String> newWindowSet = driver.getWindowHandles();
+                newWindowSet.removeAll(oldWindowSet);
+                return newWindowSet.size() > 0 ? newWindowSet.iterator().next() : null;
+            }
+        });
+        PageFactory.getDriver().switchTo().window(newWindow);
+        Assert.assertEquals("Texts do not fully match:", PageFactory.getDriver().findElement(By.xpath("//h1")).getText(), "КАК НАСЧЕТ БЕСПЛАТНОЙ ПИЦЦЫ?");
     }
+
     @And("^turning off a cookie pop-up message$")
-    public void turnOffCokies(){
+    public void turnOffCokies() {
         mainTestClass.turnOffCokies();
-        // todo: implement method to turn off cookies
     }
 
     public boolean checkIfElementIsPresent(WebElement element, int time) {
