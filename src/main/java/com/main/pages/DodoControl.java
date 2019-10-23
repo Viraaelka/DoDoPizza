@@ -5,7 +5,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class DodoControl extends MainTestClass{
     //todo find all xpath ways!
-
    // @ElementTitle("Страна - условие")
     @FindBy(xpath = "//div[text()='Страна']")
     public WebElement countryText;
