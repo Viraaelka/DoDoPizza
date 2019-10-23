@@ -1,11 +1,11 @@
 package com.main.exceptions;
 
-public class AutotestException extends  Error{
+public class AutotestError extends AssertionError{
         /**
          *
          * @param e
          */
-        public AutotestException(Throwable e){
+        public AutotestError(Throwable e){
             super(e);
         }
 
@@ -14,7 +14,7 @@ public class AutotestException extends  Error{
          * @param message a {Link java.lang.String} object
          * @param e a {Link java.lang.Throwable} object
          */
-        public AutotestException(String message, Throwable e){
+        public AutotestError(String message, Throwable e){
             super(message, e);
         }
 
@@ -22,7 +22,7 @@ public class AutotestException extends  Error{
          *
          * @param message a {Link java.lang.String} object
          */
-        public AutotestException(String message){
+        public AutotestError(String message){
             super(message);
         }
     }

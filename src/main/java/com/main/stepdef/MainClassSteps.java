@@ -2,7 +2,7 @@ package com.main.stepdef;
 
 import com.config.PageFactory;
 import com.main.pages.MainTestClass;
-import com.main.exceptions.AutotestException;
+import com.main.exceptions.AutotestError;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -43,7 +43,7 @@ public class MainClassSteps {
         //   CHECK HOW TO GET ARRAYLIST FROM DATATABLE
         //    List<String> elementList = elementName.
         if (!element.isDisplayed())
-            throw new AutotestException(String.format("Elemenet %s was not displayed", element.getText()));
+            throw new AutotestError(String.format("Elemenet %s was not displayed", element.getText()));
         element.click();
     }
 
@@ -59,7 +59,7 @@ public class MainClassSteps {
     public void applyPromo(DataTable dataTable) {
         List<String> promoList = dataTable.asList();
         if (promoList.size() < 1) {
-            throw new AutotestException("No Giveaway code has been found");
+            throw new AutotestError("No Giveaway code has been found");
         } else if (promoList.size() == 1) {
             if (checkIfElementIsPresent(mainTestClass.promocodeInput, 3) && checkIfElementIsPresent(mainTestClass.applyPromoButton, 3)) {
                 if (promoList.get(0).equals("")) {
@@ -91,7 +91,7 @@ public class MainClassSteps {
                         Assert.assertEquals(mainTestClass.promoPopupMessage.getText(), "Промокод не найден. Попробуйте другой");
                     }
                 } catch (NoSuchElementException e) {
-                    throw new AutotestException("No such elements");
+                    throw new AutotestError("No such elements");
                 }
             });
            /* int count = promoList.size();

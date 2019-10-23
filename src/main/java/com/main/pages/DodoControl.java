@@ -1,16 +1,19 @@
 package com.main.pages;
 
+import com.config.annotations.ElementTitle;
+import com.config.annotations.PageEntry;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@PageEntry(title = "DodoControl")
 public class DodoControl extends MainTestClass{
     //todo find all xpath ways!
-  //  @ElementTitle("Страна - условие")
-    @FindBy(xpath = "")
+    @ElementTitle("Страна - условие")
+    @FindBy(xpath = "//div[text()='Страна']")
     public WebElement countryText;
 
- //   @ElementTitle("Страна")
-    @FindBy(xpath = "")
+    @ElementTitle("Страна")
+    @FindBy(xpath = "//div[text()='Страна']/following-sibling::span")
     public WebElement countryInputText;
 
  //   @ElementTitle("Город - условие")

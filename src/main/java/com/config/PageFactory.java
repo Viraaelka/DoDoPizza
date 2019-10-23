@@ -1,5 +1,6 @@
 package com.config;
 
+import com.main.exceptions.AutotestError;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 public class PageFactory {
     private static WebDriver driver;
+    private static PageWrapper PageWrapper;
+    private static final String PAGES_PACKAGE = "page";
 
     private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/chromedriver";
     //  private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
@@ -30,6 +33,26 @@ public class PageFactory {
 
     public static String getDriverPath() {
         return driverPath;
+    }
+
+    /**
+     * Get PageFactory instance
+     *
+     * @return PageFactory
+     *
+     */
+    public static PageWrapper getInstance(){
+        if (null == PageWrapper){
+            PageWrapper = new PageWrapper(getPagesPackage());
+        }
+        return PageWrapper;
+    }
+
+    public static String getPagesPackage(){
+        if(PAGES_PACKAGE.isEmpty()){
+            throw new AutotestError("Please add 'page.package = page package path' to application.properties");
+        }
+        return PAGES_PACKAGE;
     }
 
     public void clearData() {

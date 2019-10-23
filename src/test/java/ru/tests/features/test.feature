@@ -1,17 +1,17 @@
-
 Feature: Site initialization
 
   @test
-Scenario: Going to the Home page
+  Scenario: Going to the Home page
     Given some map of values
-      |a|1|
-      |b|2|
-      |c|3|
+      | a | 1 |
+      | b | 2 |
+      | c | 3 |
     And turning off a cookie pop-up message
  # When applying a code to get a sale for pizza order
  #  |10000|
   # |269789     |
     When going to the page "Mistery Shopper" to fill up a form for a free pizza
+    And opening the page "DodoControl"
   #And checking that titles match
  # ||
   #  Then checking that following elements are present of the form
@@ -37,8 +37,5 @@ Scenario: Going to the Home page
     #|Согласен на получение рекламных рассылок|
     #|Отправить                               |
 
-  And filling up the "Mistery Shopper" form
-    |Страна|Беларусь|
-    |Город|Брест|
-    |Адрес пиццерии|Малиновка|
-
+    And filling up the "Mistery Shopper" form
+      | Страна | Беларусь |

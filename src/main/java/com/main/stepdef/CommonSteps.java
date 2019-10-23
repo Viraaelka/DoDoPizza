@@ -11,4 +11,18 @@ public class CommonSteps {
     public void checkTitle(){
 
     }
+
+    /**
+     * Initialize a page with corresponding title that is defined via @PageEntry
+     *
+     * @param title
+     */
+    @And("^opening the page \"([^\"]*)\"$")
+    public void openPage(String title) throws Exception{
+        for(String windowHandle : PageFactory.getDriver().getWindowHandles()){
+            PageFactory.getDriver().switchTo().window(windowHandle);
+        }
+        PageFactory.getInstance().getPage(title);
+    }
+
 }
