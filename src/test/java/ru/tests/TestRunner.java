@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class TestRunner extends BeforeAfterSetup {
@@ -56,5 +58,17 @@ public class TestRunner extends BeforeAfterSetup {
         driver.switchTo().window(originalWindow);
         System.out.println("Old window title: " + driver.getTitle());
 
+
+       /**
+        *  ANOTHER WAY to switch to a neighbour browser tab:
+        */
+       String currentTab = driver.getWindowHandle();
+       List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+       for(int i = 0; i < tabs.size(); i++){
+           if (tabs.get(i).equals(currentTab)){
+               driver.switchTo().window(tabs.get(i+1));
+               return;
+           }
+       }
     }
 }
