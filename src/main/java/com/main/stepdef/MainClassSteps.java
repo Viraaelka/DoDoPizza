@@ -24,7 +24,7 @@ import java.util.Set;
 
 public class MainClassSteps {
 
-    MainTestClass mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainTestClass.class);
+    public MainTestClass mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainTestClass.class);
 
     @Given("^some map of values$")
     public void givenMap(Map<String, Integer> map) {
@@ -107,13 +107,15 @@ public class MainClassSteps {
 
     @And("^going to the page \"Mistery Shopper\" to fill up a form for a free pizza$")
     public void goToFillUpMistyryForm() {
-
-
-
+        WebElement title = PageFactory.getDriver().findElement(By.xpath("//div[@class = 'secret-buyer-section__desc']"));
         String homePage = PageFactory.getDriver().getWindowHandle();
         final Set<String> oldWindowSet = PageFactory.getDriver().getWindowHandles();
-        if (checkIfElementIsPresent(mainTestClass.fillUpMistyrShopperButton, 3))
+        if (checkIfElementIsPresent(mainTestClass.fillUpMistyrShopperButton, 3)) {
+            Assert.assertEquals("The MysterForm is not present on " + this.getClass().getName(),
+                    "Стань тайным покупателем Додо Пиццы и получи пиццу в подарок",
+                    title.getText());
             mainTestClass.fillUpMistyrShopperButton.click();
+        }
         String newWindow = (new WebDriverWait(PageFactory.getDriver(), 5)).until(new ExpectedCondition<String>(){
             public String apply (WebDriver driver) {
                 Set<String> newWindowSet = driver.getWindowHandles();

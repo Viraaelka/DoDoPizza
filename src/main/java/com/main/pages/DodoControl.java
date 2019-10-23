@@ -3,7 +3,7 @@ package com.main.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class DodoControl {
+public class DodoControl extends MainTestClass{
     //todo find all xpath ways!
   //  @ElementTitle("Страна - условие")
     @FindBy(xpath = "")
@@ -61,6 +61,7 @@ public class DodoControl {
   //  @ElementTitle("Что вы готовы проверять?")
     @FindBy(xpath = "")
     public WebElement question_Text;
+
 
 }
 

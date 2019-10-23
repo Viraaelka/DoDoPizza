@@ -12,6 +12,8 @@ Scenario: Going to the Home page
  #  |10000|
   # |269789     |
     When going to the page "Mistery Shopper" to fill up a form for a free pizza
+  #And checking that titles match
+ # ||
   #  Then checking that following elements are present of the form
     # todo where this method should be located?
     # todo fill up cells below:
@@ -35,4 +37,8 @@ Scenario: Going to the Home page
     #|Согласен на получение рекламных рассылок|
     #|Отправить                               |
 
+  And filling up the "Mistery Shopper" form
+    |Страна|Беларусь|
+    |Город|Брест|
+    |Адрес пиццерии|Малиновка|
 
