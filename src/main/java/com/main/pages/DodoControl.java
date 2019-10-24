@@ -1,9 +1,20 @@
 package com.main.pages;
 
+import com.config.PageFactory;
+import com.main.exceptions.AutotestException;
+import io.cucumber.datatable.DataTable;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.*;
+import java.util.concurrent.TimeoutException;
+
 public class DodoControl extends MainTestClass{
+    private String xpath = "//div[text()='%s']/following-sibling::span";
+
     //todo find all xpath ways!
    // @ElementTitle("Страна - условие")
     @FindBy(xpath = "//div[text()='Страна']")
@@ -62,6 +73,32 @@ public class DodoControl extends MainTestClass{
     @FindBy(xpath = "")
     public WebElement question_Text;
 
+    public void fillUpForm(DataTable dataTable){
+        Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
+        mapForm.forEach((k, v) -> {
+            WebElement element;
+            try{
+                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, k)));
+            }catch (NoSuchElementException e)
+            {
+                throw new AutotestException(String.format("No such element %s was found in class %s", k, this.getClass().getName()), e);
+            }
+        });
 
+    }
+    public void checkUpNamesInForm(DataTable dataTable){
+        List<DataTable> mapForm = Arrays.asList(dataTable);
+        mapForm.forEach(s -> {
+            WebElement element;
+            try{
+                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, s)));
+            }catch (NoSuchElementException e)
+            {
+                throw new AutotestException(String.format("No such element %s was found in class %s", s, this.getClass().getName()), e);
+            }
+            Assert.assertEquals("Texts do not match", element.getText(), s);
+        });
+
+    }
 }
 

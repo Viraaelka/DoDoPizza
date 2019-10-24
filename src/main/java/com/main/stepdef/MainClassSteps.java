@@ -154,7 +154,5 @@ public class MainClassSteps {
 
         }); */
     }
-
-
 }
 // https://stackoverflow.com/questions/44912203/selenium-web-driver-java-element-is-not-clickable-at-point-x-y-other-elem

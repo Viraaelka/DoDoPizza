@@ -14,12 +14,12 @@ Scenario: Going to the Home page
     When going to the page "Mistery Shopper" to fill up a form for a free pizza
   #And checking that titles match
  # ||
-  #  Then checking that following elements are present of the form
+    Then checking that following elements are present of the form
     # todo where this method should be located?
     # todo fill up cells below:
    # |Станьте тайным покупателем|
-   # |Страна|
-    #|Город|
+   |Страна|
+   |Город|
     #|Адрес пиццерии|
     #|Имя|
     #|Дата рождения|

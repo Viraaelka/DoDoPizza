@@ -1,10 +1,15 @@
 package com.main.pages;
 
+import com.config.PageFactory;
+import com.main.exceptions.AutotestException;
+import io.cucumber.datatable.DataTable;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -68,5 +73,8 @@ public class MainTestClass extends WrapperPage{
 
     @FindBy(xpath = "//div[@class='popup__dialog-inner']//following-sibling::span")
     public WebElement pizzaTitle;
+
+
+
 
 }
