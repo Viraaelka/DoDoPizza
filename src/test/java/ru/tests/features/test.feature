@@ -42,3 +42,60 @@ Scenario: Going to the Home page
     |Город|Брест|
     |Адрес пиццерии|Малиновка|
 
+  public class StepDef{
+
+  private static StepDefs instance = new StepDefs();
+
+  private static IDodoControlSteps iDodoControlSteps;
+  private static IElementsSteps iElementSteps;
+  private static IMainClassSteps iMainSteps;
+
+  public static IDodoControlSteps getDodoControlSteps(){
+  if(iDodoControlSteps == null){
+  iDodoControlSteps = new DodoControlStepsImpl();
+  }
+  return iDodoControlSteps;
+  }
+  public static void setDodoControl(IDodoControlSteps iDodoControlSteps){
+  StepDef.iDodoControlSteps = iDodoControlSteps;
+  }
+  public static IElementsSteps getElementSteps(){
+  if(iElementSteps == null){
+  iElementSteps = new ElementsStepsImpl();
+  }
+  return iElementSteps;
+  }
+  public static void setElementSteps(IElementsSteps iElementSteps){
+  StepDef.iElementSteps = iElementSteps;
+  }
+  public static getMainClassSteps(){
+  if(iMainSteps == null){
+  iMainSteps = new MainStepsImpl();
+  }
+  return iMainSteps;
+  }
+  public static void setMainClassSteps(IMainClassSteps iMainSteps){
+  StepDef.iMainSteps = iMainSteps;
+  }
+  }
+
+  public class ElementsStepDefinitions{
+
+  Поля заполнены данными
+  public void fillFields(DataTable dataTable) throws Exception{
+  getElementSteps.fillFields(dataTable);
+  }
+  }
+
+  public class ElementsStepsImpl implements IElementsSteps{
+  @Override
+  public void fillFields(DataTable dataTable) throws PageException {
+  Map<String, String> elemValuesMap = dataTable.asMap(String.class, String.class);
+
+  }
+
+  @Override
+  public void checkTextOnElement(WebElement element, String expectedText) throws Exception{
+  Assert.assertTrue("Actual value is not equal to expected one", element.getText().contains(expectedText));
+  }
+  }
