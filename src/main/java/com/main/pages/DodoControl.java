@@ -10,18 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.*;
-import java.util.concurrent.TimeoutException;
 
 public class DodoControl extends MainTestClass{
     private String xpath = "//div[text()='%s']/following-sibling::span";
 
     //todo find all xpath ways!
    // @ElementTitle("Страна - условие")
-    @FindBy(xpath = "//div[text()='Страна']")
+    @FindBy(xpath = "//div[text()='Country']")
     public WebElement countryText;
 
    // @ElementTitle("Страна")
-    @FindBy(xpath = "//div[text()='Страна']/following-sibling::span")
+    @FindBy(xpath = "//div[text()='City']/following-sibling::span")
     public WebElement countryInputText;
 
  //   @ElementTitle("Город - условие")
@@ -73,6 +72,10 @@ public class DodoControl extends MainTestClass{
     @FindBy(xpath = "")
     public WebElement question_Text;
 
+    public DodoControl(WebDriver driver) {
+        super(driver);
+    }
+
     public void fillUpForm(DataTable dataTable){
         Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
         mapForm.forEach((k, v) -> {
@@ -86,19 +89,24 @@ public class DodoControl extends MainTestClass{
         });
 
     }
-    public void checkUpNamesInForm(DataTable dataTable){
-        List<DataTable> mapForm = Arrays.asList(dataTable);
-        mapForm.forEach(s -> {
-            WebElement element;
-            try{
-                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, s)));
-            }catch (NoSuchElementException e)
-            {
-                throw new AutotestException(String.format("No such element %s was found in class %s", s, this.getClass().getName()), e);
-            }
-            Assert.assertEquals("Texts do not match", element.getText(), s);
-        });
 
-    }
+ public void checkUpNamesInForm(List<String> mapForm){
+      mapForm.forEach(s -> {
+          WebElement element;
+          try{
+              if (s.equals("Country"))
+              {
+                  xpath = "//div[text()='Страна']";
+              }
+              element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, s)));
+          }catch (NoSuchElementException e)
+          {
+              throw new AutotestException(String.format("No such element %s was found in class %s", s, this.getClass().getName()), e);
+          }
+          Assert.assertEquals("Texts do not match", element.getText(), s);
+      });
+
+  }
+
 }
 

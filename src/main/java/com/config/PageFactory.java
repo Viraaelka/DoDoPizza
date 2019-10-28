@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 public class PageFactory {
     private static WebDriver driver;
 
-    private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/chromedriver";
-    //  private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
-    public static String website = "https://dodopizza.ru/peterburg";
+    //private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/chromedriver";
+      private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
+    public static String website = "https://dodopizza.com/oxford";
 
     public void setUp() {
         ChromeOptions options = new ChromeOptions();

@@ -2,13 +2,25 @@ package com.main.pages;
 
 import com.config.PageFactory;
 import com.main.exceptions.AutotestException;
-import io.cucumber.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class WrapperPage {
+    WebDriver driver;
 
+   // @FindBy(xpath = "//div[@class='navigation__inner']//li")
+    List<WebElement> navigationList = driver.findElements(By.xpath("//div[@class='navigation__inner']//li"));
+
+    String[] navigationNames = {"Pizza", "Snacks", "Desserts", "Drinks", "Deals", "Store info", "Live"};
+
+    public WrapperPage(WebDriver driver){
+        this.driver = PageFactory.getDriver();
+    }
     public void turnOffCokies(){
         PageFactory.getDriver().findElement(By.xpath("//div[@class='cookie-policy']//button")).click();
     }
@@ -20,4 +32,10 @@ public class WrapperPage {
         //todo check if Assert class can be declared in non-hooky class?
             Assert.assertEquals("Titles do not match", element.getText(), actualValue);
     }
+    public void checkNavigationTitles(){
+        for(int i = 0; i < navigationList.size(); i++) {
+            checkTitle("//div[@class='navigation__inner']//li[" + i + "]", navigationNames[i]);
+        }
+    }
 }
+ // todo how to parse xpath path

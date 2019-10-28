@@ -131,6 +131,10 @@ public class MainClassSteps {
     public void turnOffCokies() {
         mainTestClass.turnOffCokies();
     }
+    @And("^check Navigation menu titles$")
+    public void checkNavigationTitles(){
+        mainTestClass.checkNavigationTitles();
+    }
 
     public boolean checkIfElementIsPresent(WebElement element, int time) {
         try {

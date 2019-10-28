@@ -2,18 +2,18 @@ package com.main.stepdef;
 
 import com.config.PageFactory;
 import com.main.pages.DodoControl;
-import com.main.pages.MainTestClass;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import org.openqa.selenium.WebDriver;
 
+import java.util.List;
 import java.util.Map;
 
 public class MysteryShopperSteps {
-    DodoControl dodoControl = new DodoControl();
+    DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), DodoControl.class);
+
 
     @And("^checking that following elements are present of the form$")
-    public void checkUpNamesInForm(DataTable dataTable){
+    public void checkUpNamesInForm(List<String> dataTable){
         dodoControl.checkUpNamesInForm(dataTable);
     }
 
