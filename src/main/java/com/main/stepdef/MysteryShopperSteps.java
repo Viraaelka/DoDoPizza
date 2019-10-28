@@ -11,8 +11,7 @@ import java.util.Map;
 public class MysteryShopperSteps {
     DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), DodoControl.class);
 
-
-    @And("^checking that following elements are present of the form$")
+    @And("^проверяем наличие элементов на странице$")
     public void checkUpNamesInForm(List<String> dataTable){
         dodoControl.checkUpNamesInForm(dataTable);
     }

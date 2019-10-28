@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MainTestClass extends WrapperPage{
+public class MainClassRussianTest extends WrapperPage{
     private WebDriver webdriver = com.config.PageFactory.getDriver();
 
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
@@ -37,7 +37,7 @@ public class MainTestClass extends WrapperPage{
     @FindBy(xpath = "//div[@class='secret-buyer-section']//a[text()='Заполнить анкету']")
     public WebElement fillUpMistyrShopperButton;
 
-    public MainTestClass(WebDriver driver) {
+    public MainClassRussianTest(WebDriver driver) {
         super(driver);
     }
 
@@ -77,8 +77,5 @@ public class MainTestClass extends WrapperPage{
 
     @FindBy(xpath = "//div[@class='popup__dialog-inner']//following-sibling::span")
     public WebElement pizzaTitle;
-
-
-
 
 }

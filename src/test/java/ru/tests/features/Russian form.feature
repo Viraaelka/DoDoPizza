@@ -1,22 +1,23 @@
+ #language: ru
 
-Feature: Site initialization
+ Функционал: Проверка работы формы "Тайный покупатель"
 
-  @test
-  Scenario: Going to the Home page
+   @test
+   Сценарий: Тестирование формы "Тайный покупатель"
 
-    And turning off a cookie pop-up message
+     Когда мы заходим на главную страницу и отключаем куки
  # When applying a code to get a sale for pizza order
  #  |10000|
   # |269789     |
-    When going to the page "Mistery Shopper" to fill up a form for a free pizza
+     И переходим на страницу "Тайный покупатель"
   #And checking that titles match
  # ||
-    Then checking that following elements are present of the form
+     И проверяем наличие элементов на странице
     # todo where this method should be located?
     # todo fill up cells below:
    # |Станьте тайным покупателем|
-      |Country|
-      |City|
+       | Страна |
+       | Город  |
     #|Адрес пиццерии|
     #|Имя|
     #|Дата рождения|
@@ -34,9 +35,9 @@ Feature: Site initialization
     #|Согласен на получение рекламных рассылок|
     #|Отправить                               |
 
-    And filling up the "Mistery Shopper" form
-      |Страна|Беларусь|
-      |Город|Брест|
-      |Адрес пиццерии|Малиновка|
+   And filling up the "Mistery Shopper" form
+   |Страна|Беларусь|
+   |Город|Брест|
+   |Адрес пиццерии|Малиновка|
 
 # todo redo all methods that are indent for Russian form to launch it and test in Russian

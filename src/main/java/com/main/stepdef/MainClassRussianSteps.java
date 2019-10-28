@@ -1,7 +1,7 @@
 package com.main.stepdef;
 
 import com.config.PageFactory;
-import com.main.pages.MainTestClass;
+import com.main.pages.MainClassRussianTest;
 import com.main.exceptions.AutotestException;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -22,9 +22,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class MainClassSteps {
+public class MainClassRussianSteps {
 
-    public MainTestClass mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainTestClass.class);
+    public MainClassRussianTest mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainClassRussianTest.class);
 
     @Given("^some map of values$")
     public void givenMap(Map<String, Integer> map) {
@@ -105,7 +105,7 @@ public class MainClassSteps {
         }
     }
 
-    @And("^going to the page \"Mistery Shopper\" to fill up a form for a free pizza$")
+    @And("^И переходим на страницу \"Тайный покупатель\"$")
     public void goToFillUpMistyryForm() {
         WebElement title = PageFactory.getDriver().findElement(By.xpath("//div[@class = 'secret-buyer-section__desc']"));
         String homePage = PageFactory.getDriver().getWindowHandle();
@@ -131,6 +131,12 @@ public class MainClassSteps {
     public void turnOffCokies() {
         mainTestClass.turnOffCokies();
     }
+
+    @When("^мы заходим на главную страницу и отключаем куки$")
+    public void  turnOffCokies() {
+        mainTestClass.turnOffCokies();
+    }
+
     @And("^check Navigation menu titles$")
     public void checkNavigationTitles(){
         mainTestClass.checkNavigationTitles();

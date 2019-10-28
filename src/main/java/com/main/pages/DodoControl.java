@@ -11,64 +11,64 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.*;
 
-public class DodoControl extends MainTestClass{
+public class DodoControl extends MainClassRussianTest {
     private String xpath = "//div[text()='%s']/following-sibling::span";
 
     //todo find all xpath ways!
-   // @ElementTitle("Страна - условие")
-    @FindBy(xpath = "//div[text()='Country']")
+    // @ElementTitle("Страна - условие")
+    @FindBy(xpath = "//div[text()='Страна']")
     public WebElement countryText;
 
-   // @ElementTitle("Страна")
-    @FindBy(xpath = "//div[text()='City']/following-sibling::span")
+    // @ElementTitle("Страна")
+    @FindBy(xpath = "//div[text()='Город']/following-sibling::span")
     public WebElement countryInputText;
 
- //   @ElementTitle("Город - условие")
+    //   @ElementTitle("Город - условие")
     @FindBy(xpath = "")
     public WebElement cityText;
 
- //   @ElementTitle("Город")
+    //   @ElementTitle("Город")
     @FindBy(xpath = "")
     public WebElement cityInputText;
 
-  //  @ElementTitle("Адрес пиццерии")
+    //  @ElementTitle("Адрес пиццерии")
     @FindBy(xpath = "")
     public WebElement addressText;
 
-  //  @ElementTitle("Имя")
+    //  @ElementTitle("Имя")
     @FindBy(xpath = "")
     public WebElement nameText;
 
-   // @ElementTitle("Дата рождения")
+    // @ElementTitle("Дата рождения")
     @FindBy(xpath = "")
     public WebElement birthdayText;
 
-  //  @ElementTitle("Телефон")
+    //  @ElementTitle("Телефон")
     @FindBy(xpath = "")
     public WebElement phoneText;
 
- //   @ElementTitle("Вконтакте")
+    //   @ElementTitle("Вконтакте")
     @FindBy(xpath = "")
     public WebElement vkText;
 
- //   @ElementTitle("Вы или ваши знакомые работали в Додо Пицце?")
+    //   @ElementTitle("Вы или ваши знакомые работали в Додо Пицце?")
     @FindBy(xpath = "")
     public WebElement askQuestionText;
 
- //   @ElementTitle("Нет")
+    //   @ElementTitle("Нет")
     @FindBy(xpath = "")
     public WebElement noReplyText;
 
- //   @ElementTitle("Да, раньше")
+    //   @ElementTitle("Да, раньше")
     @FindBy(xpath = "")
     public WebElement yepReplyText;
 
- //   @ElementTitle("Да, прямо сейчас")
+    //   @ElementTitle("Да, прямо сейчас")
     @FindBy(xpath = "")
     public WebElement YepRightNowText;
 
 
-  //  @ElementTitle("Что вы готовы проверять?")
+    //  @ElementTitle("Что вы готовы проверять?")
     @FindBy(xpath = "")
     public WebElement question_Text;
 
@@ -76,37 +76,31 @@ public class DodoControl extends MainTestClass{
         super(driver);
     }
 
-    public void fillUpForm(DataTable dataTable){
+    public void fillUpForm(DataTable dataTable) {
         Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
         mapForm.forEach((k, v) -> {
             WebElement element;
-            try{
+            try {
                 element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, k)));
-            }catch (NoSuchElementException e)
-            {
+            } catch (NoSuchElementException e) {
                 throw new AutotestException(String.format("No such element %s was found in class %s", k, this.getClass().getName()), e);
             }
         });
 
     }
 
- public void checkUpNamesInForm(List<String> mapForm){
-      mapForm.forEach(s -> {
-          WebElement element;
-          try{
-              if (s.equals("Country"))
-              {
-                  xpath = "//div[text()='Страна']";
-              }
-              element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, s)));
-          }catch (NoSuchElementException e)
-          {
-              throw new AutotestException(String.format("No such element %s was found in class %s", s, this.getClass().getName()), e);
-          }
-          Assert.assertEquals("Texts do not match", element.getText(), s);
-      });
+    public void checkUpNamesInForm(List<String> mapForm) {
+        mapForm.forEach(s -> {
+            WebElement element;
+            try {
+                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, s)));
+            } catch (NoSuchElementException e) {
+                throw new AutotestException(String.format("No such element %s was found in class %s", s, this.getClass().getName()), e);
+            }
+            Assert.assertEquals("Texts do not match", element.getText(), s);
+        });
 
-  }
+    }
 
 }
 
