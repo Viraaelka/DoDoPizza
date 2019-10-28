@@ -21,6 +21,7 @@ public class WrapperPage {
     public WrapperPage(WebDriver driver){
         this.driver = PageFactory.getDriver();
     }
+
     public void turnOffCokies(){
         PageFactory.getDriver().findElement(By.xpath("//div[@class='cookie-policy']//button")).click();
     }

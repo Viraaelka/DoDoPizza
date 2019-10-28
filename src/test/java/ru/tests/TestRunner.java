@@ -1,6 +1,6 @@
 package ru.tests;
 
-import com.main.pages.MainTestClass;
+import com.main.pages.MainClassRussianTest;
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 
@@ -10,7 +10,7 @@ public class TestRunner extends BeforeAfterSetup {
     /* ----------- Expected values -----------------*/
     int navigaionMenuElementsNumber = 10;
 
-    MainTestClass mainTestClass = PageFactory.initElements(BeforeAfterSetup.driver, MainTestClass.class);
+    MainClassRussianTest mainTestClass = PageFactory.initElements(BeforeAfterSetup.driver, MainClassRussianTest.class);
 
     // public void clickOnElemenet() {PageFactory.initElements(driver, MainTestClass.class).clickOnItem();}
 
