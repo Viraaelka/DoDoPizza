@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class WrapperPage {
-    WebDriver driver;
+    private WebDriver driver = PageFactory.getDriver();
 
    // @FindBy(xpath = "//div[@class='navigation__inner']//li")
     List<WebElement> navigationList = driver.findElements(By.xpath("//div[@class='navigation__inner']//li"));
@@ -19,7 +19,7 @@ public class WrapperPage {
     String[] navigationNames = {"Pizza", "Snacks", "Desserts", "Drinks", "Deals", "Store info", "Live"};
 
     public WrapperPage(WebDriver driver){
-        this.driver = PageFactory.getDriver();
+        this.driver = driver;
     }
 
     public void turnOffCokies(){

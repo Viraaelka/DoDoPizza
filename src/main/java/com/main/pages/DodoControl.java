@@ -3,6 +3,7 @@ package com.main.pages;
 import com.config.PageFactory;
 import com.main.exceptions.AutotestException;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

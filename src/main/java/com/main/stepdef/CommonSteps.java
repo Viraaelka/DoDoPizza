@@ -1,7 +1,6 @@
 package com.main.stepdef;
 
 import com.config.PageFactory;
-import com.main.pages.MainTestClass;
 import io.cucumber.java.en.And;
 
 public class CommonSteps {

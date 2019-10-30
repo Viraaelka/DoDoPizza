@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class MainClassRussianTest extends WrapperPage{
-    private WebDriver webdriver = com.config.PageFactory.getDriver();
+ //   private WebDriver webdriver = com.config.PageFactory.getDriver();
 
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
@@ -54,12 +54,6 @@ public class MainClassRussianTest extends WrapperPage{
           // return count;
       }
       */
-    public List<WebElement> getNavigationMenuList(){
-       for(WebElement elem : webdriver.findElements(By.xpath("//ul[@class='navigation__list']/descendant::a"))){
-            System.out.println(elem.getText());
-        }
-        return webdriver.findElements(By.xpath("//ul[@class='navigation__list']/descendant::a"));
-    }
 
     public int findAmountOfElements(List<WebElement> array){
         if(array.isEmpty())

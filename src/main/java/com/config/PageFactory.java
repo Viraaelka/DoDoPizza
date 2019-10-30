@@ -11,7 +11,8 @@ public class PageFactory {
 
     //private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/chromedriver";
       private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
-    public static String website = "https://dodopizza.com/oxford";
+   // public static String website = "https://dodopizza.com/oxford";
+   public static String website = "https://dodopizza.ru/petergof/";
 
     public void setUp() {
         ChromeOptions options = new ChromeOptions();

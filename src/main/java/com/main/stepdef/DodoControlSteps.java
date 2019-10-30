@@ -4,11 +4,12 @@ import com.config.PageFactory;
 import com.main.pages.DodoControl;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 import java.util.Map;
 
-public class MysteryShopperSteps {
+public class DodoControlSteps {
     DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), DodoControl.class);
 
     @And("^проверяем наличие элементов на странице$")
@@ -16,11 +17,4 @@ public class MysteryShopperSteps {
         dodoControl.checkUpNamesInForm(dataTable);
     }
 
-    @And("^filling up the \"Mistery Shopper\" form$")
-    public void fillUpForm(DataTable dataTable){
-        Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
-        mapForm.forEach((k, v) -> {
-
-        });
-    }
 }
