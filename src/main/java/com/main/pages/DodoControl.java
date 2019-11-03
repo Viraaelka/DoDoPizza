@@ -12,29 +12,73 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.*;
 
-public class DodoControl{
+public class DodoControl {
     private String xpath = "//div[text()='%s']/following-sibling::span";
-    Map<String, String> mapForm = new HashMap<>();
-    public void setHashMap(){
-        mapForm.put("Страна", "//div[text()='Страна']/following-sibling::span");
-        mapForm.put("Город", "//div[text()='Город']/following-sibling::span");
-        mapForm.put("Адрес пиццерии", "");
-        mapForm.put("Имя", "");
-        mapForm.put("Дата рождения", "");
-        mapForm.put("Телефон", "");
-        mapForm.put("Вконтакте", "");
-        mapForm.put("Вы или ваши знакомые работали в Додо Пицце?", "");
-        mapForm.put("", "");
-        mapForm.put("", "");
-        mapForm.put("", "");
-        mapForm.put("Что вы готовы проверять?", "");
-        mapForm.put("", "");
-        mapForm.put("", "");
-        mapForm.put("", "");
-        mapForm.put("Согласен на обработку персональных данных", "");
-        mapForm.put("Согласен на получение рекламных рассылок", "");
+    public Map<String, String> mapFormXpath = new HashMap<>();
+    public Set<String> hashSetXpath = new HashSet<>();
+
+    public void setHashMap() {
+        mapFormXpath.put("Страна", "//div[text()='Страна']/following-sibling::span");
+        mapFormXpath.put("Город", "//div[text()='Город']/following-sibling::span");
+        mapFormXpath.put("Адрес пиццерии", "//div[text()='Адрес ']/following-sibling::span//span[@role='combobox']");
+        mapFormXpath.put("Имя", "//div[text()='Имя']/following-sibling::input");
+        mapFormXpath.put("Дата рождения", "//div[text()='Дата ']/following-sibling::input");
+        mapFormXpath.put("Телефон", "//div[text()='Телефон']/following-sibling::input");
+        mapFormXpath.put("Вконтакте", "//div[text()='Вконтакте']/following-sibling::input");
+        mapFormXpath.put("Вы или ваши знакомые работали в Додо Пицце?", "//div[@class='form__main'][1]//following-sibling::label[@class='main']");
+        mapFormXpath.put("Нет", "//div[@class='form__main'][1]//following-sibling::label[@for='1']");
+        mapFormXpath.put("Да, раньше", "//div[@class='form__main'][1]//following-sibling::label[@for='2']");
+        mapFormXpath.put("Да, прямо сейчас", "//div[@class='form__main'][1]//following-sibling::label[@for='1']");
+        mapFormXpath.put("Что вы готовы проверять?", "//div[@class='form__main'][2]//following-sibling::label[@class='main']");
+        mapFormXpath.put("Ресторан", "//div[@class='form__main'][2]//following-sibling::label[@for='4']");
+        mapFormXpath.put("Доставку", "//div[@class='form__main'][2]//following-sibling::label[@for='5']");
+        mapFormXpath.put("И то, и другое", "//div[@class='form__main'][2]//following-sibling::label[@for='6']");
+        //   mapFormXpath.put("Согласен на обработку персональных данных", "");
+        //   mapFormXpath.put("Согласен на получение рекламных рассылок", "");
+        mapFormXpath.put("Отправить", "//button[text()='Отправить']");
 
     }
+
+    public void setHashSet() {
+        hashSetXpath.add("//div[text()='Страна']/following-sibling::span");
+        hashSetXpath.add("//div[text()='Город']/following-sibling::span");
+        hashSetXpath.add("//div[text()='Адрес ']/following-sibling::span//span[@role='combobox']");
+        hashSetXpath.add("//div[text()='Имя']/following-sibling::input");
+        hashSetXpath.add("//div[text()='Дата ']/following-sibling::input");
+        hashSetXpath.add("//div[text()='Телефон']/following-sibling::input");
+        hashSetXpath.add("//div[text()='Вконтакте']/following-sibling::input");
+        hashSetXpath.add("//div[@class='form__main'][1]//following-sibling::label[@class='main']");
+        hashSetXpath.add("//div[@class='form__main'][1]//following-sibling::label[@for='1']");
+        hashSetXpath.add("//div[@class='form__main'][1]//following-sibling::label[@for='2']");
+        hashSetXpath.add("//div[@class='form__main'][1]//following-sibling::label[@for='1']");
+        hashSetXpath.add("//div[@class='form__main'][2]//following-sibling::label[@class='main']");
+        hashSetXpath.add("//div[@class='form__main'][2]//following-sibling::label[@for='4']");
+        hashSetXpath.add("//div[@class='form__main'][2]//following-sibling::label[@for='5']");
+        hashSetXpath.add("//div[@class='form__main'][2]//following-sibling::label[@for='6']");
+        hashSetXpath.add("");
+        hashSetXpath.add("");
+        hashSetXpath.add("//button[text()='Отправить']");
+
+    }
+
+    public String[] strXpath = {
+            "//div[text()='Страна']/following-sibling::span",
+            "//div[text()='Город']/following-sibling::span",
+            "//div[text()='Адрес ']/following-sibling::span//span[@role='combobox']",
+            "//div[text()='Имя']/following-sibling::input",
+            "//div[text()='Дата ']/following-sibling::input",
+            "//div[text()='Телефон']/following-sibling::input",
+            "//div[text()='Вконтакте']/following-sibling::input",
+            "//div[@class='form__main'][1]//following-sibling::label[@class='main']",
+            "//div[@class='form__main'][1]//following-sibling::label[@for='1']",
+            "//div[@class='form__main'][1]//following-sibling::label[@for='2']",
+            "//div[@class='form__main'][1]//following-sibling::label[@for='1']",
+            "//div[@class='form__main'][2]//following-sibling::label[@class='main']",
+            "//div[@class='form__main'][2]//following-sibling::label[@for='4']",
+            "//div[@class='form__main'][2]//following-sibling::label[@for='5']",
+            "//div[@class='form__main'][2]//following-sibling::label[@for='6']",
+            "//button[text()='Отправить']"
+    };
 
     //todo find all xpath ways!
     // @ElementTitle("Страна - условие")
@@ -115,17 +159,28 @@ public class DodoControl{
 
     public void checkUpNamesInForm(DataTable dataTable) {
         Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
+        setHashMap();
+
+        // for(String sXpath : strXpath){
         mapForm.forEach((k, v) -> {
-            WebElement element;
-            try {
-                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, k)));
-            } catch (NoSuchElementException e) {
-                throw new AutotestException(String.format("No such element %s was found in class %s", v, this.getClass().getName()), e);
-            }
-            Assert.assertEquals("Texts do not match", element.getText(), v);
+            System.out.println("k = " + k + " v = " + v);
+            mapFormXpath.forEach((kXpath, vXpath) -> {
+
+                WebElement element = null;
+                try {
+                    if (k.equals(kXpath)) {
+                        element = PageFactory.getDriver().findElement(By.xpath(vXpath));
+                        System.out.println("kXpath = " + kXpath + " k = " + k);
+                        System.out.println("ELEMENT = " + element.getText() + " and v = " + v);
+                        Assert.assertEquals("Texts do not match", element.getText(), v);
+                    }
+                } catch (NoSuchElementException e) {
+                    throw new AutotestException(String.format("No such element %s was found in class %s", v, this.getClass().getName()), e);
+                }
+            });
         });
+        // }
 
     }
-
 }
 

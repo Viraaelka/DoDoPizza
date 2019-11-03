@@ -40,8 +40,8 @@ public class MainClassRussianSteps {
                     title.getText());
             mainTestClass.fillUpMistyrShopperButton.click();
         }
-        String newWindow = (new WebDriverWait(driver, 5)).until(new ExpectedCondition<String>(){
-            public String apply (WebDriver driver) {
+        String newWindow = (new WebDriverWait(driver, 5)).until(new ExpectedCondition<String>() {
+            public String apply(WebDriver driver) {
                 Set<String> newWindowSet = driver.getWindowHandles();
                 newWindowSet.removeAll(oldWindowSet);
                 return newWindowSet.size() > 0 ? newWindowSet.iterator().next() : null;
@@ -50,7 +50,6 @@ public class MainClassRussianSteps {
         driver.switchTo().window(newWindow);
         Assert.assertEquals("Texts do not fully match:", driver.findElement(By.xpath("//h1")).getText(), "КАК НАСЧЕТ БЕСПЛАТНОЙ ПИЦЦЫ?");
     }
-
 
 
     public boolean checkIfElementIsPresent(WebElement element, int time) {

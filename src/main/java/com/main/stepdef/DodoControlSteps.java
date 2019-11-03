@@ -16,7 +16,7 @@ public class DodoControlSteps {
     public DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(driver, DodoControl.class);
 
     @And("^проверяем наличие элементов на странице$")
-    public void checkUpNamesInForm(DataTable dataTable){
+    public void checkUpNamesInForm(DataTable dataTable) {
         dodoControl.checkUpNamesInForm(dataTable);
     }
 
