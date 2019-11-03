@@ -51,10 +51,7 @@ public class MainClassRussianSteps {
         Assert.assertEquals("Texts do not fully match:", driver.findElement(By.xpath("//h1")).getText(), "КАК НАСЧЕТ БЕСПЛАТНОЙ ПИЦЦЫ?");
     }
 
-    @Когда("^мы заходим на главную страницу и отключаем куки$")
-    public void turnOffCokies() {
-        mainTestClass.turnOffCokies();
-    }
+
 
     public boolean checkIfElementIsPresent(WebElement element, int time) {
         try {

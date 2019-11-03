@@ -2,12 +2,15 @@ package com.main.stepdef;
 
 import com.config.PageFactory;
 import io.cucumber.java.en.And;
+import io.cucumber.java.ru.Когда;
+import com.main.pages.MainClassRussianTest;
 
 public class CommonSteps {
-    // MainTestClass mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainTestClass.class);
+    MainClassRussianTest mainTestClass = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), MainClassRussianTest.class);
 
-    @And("^checking that titles match$")
-    public void checkTitle(){
-
+    @Когда("^мы заходим на главную страницу и отключаем куки$")
+    public void turnOffCokies() {
+        mainTestClass.turnOffCokies();
     }
+
 }

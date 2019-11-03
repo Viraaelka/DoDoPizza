@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class WrapperPage {
     private WebDriver driver = PageFactory.getDriver();
@@ -38,5 +39,7 @@ public class WrapperPage {
             checkTitle("//div[@class='navigation__inner']//li[" + i + "]", navigationNames[i]);
         }
     }
+
+
 }
  // todo how to parse xpath path

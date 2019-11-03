@@ -2,18 +2,21 @@ package com.main.stepdef;
 
 import com.config.PageFactory;
 import com.main.pages.DodoControl;
+import com.main.pages.MainClassRussianTest;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 import java.util.Map;
 
 public class DodoControlSteps {
-    DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), DodoControl.class);
+    private WebDriver driver = PageFactory.getDriver();
+    public DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(driver, DodoControl.class);
 
     @And("^проверяем наличие элементов на странице$")
-    public void checkUpNamesInForm(List<String> dataTable){
+    public void checkUpNamesInForm(DataTable dataTable){
         dodoControl.checkUpNamesInForm(dataTable);
     }
 

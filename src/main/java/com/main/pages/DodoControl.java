@@ -12,8 +12,29 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.*;
 
-public class DodoControl extends MainClassRussianTest {
+public class DodoControl{
     private String xpath = "//div[text()='%s']/following-sibling::span";
+    Map<String, String> mapForm = new HashMap<>();
+    public void setHashMap(){
+        mapForm.put("Страна", "//div[text()='Страна']/following-sibling::span");
+        mapForm.put("Город", "//div[text()='Город']/following-sibling::span");
+        mapForm.put("Адрес пиццерии", "");
+        mapForm.put("Имя", "");
+        mapForm.put("Дата рождения", "");
+        mapForm.put("Телефон", "");
+        mapForm.put("Вконтакте", "");
+        mapForm.put("Вы или ваши знакомые работали в Додо Пицце?", "");
+        mapForm.put("", "");
+        mapForm.put("", "");
+        mapForm.put("", "");
+        mapForm.put("Что вы готовы проверять?", "");
+        mapForm.put("", "");
+        mapForm.put("", "");
+        mapForm.put("", "");
+        mapForm.put("Согласен на обработку персональных данных", "");
+        mapForm.put("Согласен на получение рекламных рассылок", "");
+
+    }
 
     //todo find all xpath ways!
     // @ElementTitle("Страна - условие")
@@ -73,8 +94,10 @@ public class DodoControl extends MainClassRussianTest {
     @FindBy(xpath = "")
     public WebElement question_Text;
 
+    private WebDriver webDriver = PageFactory.getDriver();
+
     public DodoControl(WebDriver driver) {
-        super(driver);
+        this.webDriver = driver;
     }
 
     public void fillUpForm(DataTable dataTable) {
@@ -90,15 +113,16 @@ public class DodoControl extends MainClassRussianTest {
 
     }
 
-    public void checkUpNamesInForm(List<String> mapForm) {
-        mapForm.forEach(s -> {
+    public void checkUpNamesInForm(DataTable dataTable) {
+        Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
+        mapForm.forEach((k, v) -> {
             WebElement element;
             try {
-                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, s)));
+                element = PageFactory.getDriver().findElement(By.xpath(String.format(xpath, k)));
             } catch (NoSuchElementException e) {
-                throw new AutotestException(String.format("No such element %s was found in class %s", s, this.getClass().getName()), e);
+                throw new AutotestException(String.format("No such element %s was found in class %s", v, this.getClass().getName()), e);
             }
-            Assert.assertEquals("Texts do not match", element.getText(), s);
+            Assert.assertEquals("Texts do not match", element.getText(), v);
         });
 
     }

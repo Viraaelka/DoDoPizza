@@ -42,32 +42,6 @@ public class MainClassRussianTest extends WrapperPage{
     }
 
 
-    /*  public void getElementDisplayedOnNavigationPanel(){
-          int count = 0;
-          for(WebElement element : navigationMenu){
-              if(element.isDisplayed()){
-                  count++;
-              }
-          }
-          System.out.println(count + " getTitle() = " + webdriver.getTitle());
-          //   return navigationMenu.stream().filter(webElement -> webElement.isDisplayed()).peek();
-          // return count;
-      }
-      */
-
-    public int findAmountOfElements(List<WebElement> array){
-        if(array.isEmpty())
-            throw new NoSuchElementException("The list of elements is empty " + array.toString());
-        return array.size();
-    }
-
-
-    public void clickOnItem(WebElement element){
-        if(element.isDisplayed())
-            element.click();
-        else
-            throw new NoSuchElementException("Unable to find and click on the element " + element.getText());
-    }
 
     @FindBy(xpath = "//div[@class='popup__dialog-inner']//following-sibling::span")
     public WebElement pizzaTitle;
