@@ -15,9 +15,14 @@ public class DodoControlSteps {
     private WebDriver driver = PageFactory.getDriver();
     public DodoControl dodoControl = org.openqa.selenium.support.PageFactory.initElements(driver, DodoControl.class);
 
-    @And("^проверяем наличие элементов на странице$")
-    public void checkUpNamesInForm(DataTable dataTable) {
+    @And("^проверяем наличие элементов для заполнения на странице$")
+    public void checkUpFieldsToFill(DataTable dataTable) {
         dodoControl.checkUpNamesInForm(dataTable);
     }
+    @And ("^проверяем наличие элементов на странице$")
+    public void checkFields(List<String> filedsList){
+        dodoControl.checkFields(filedsList);
+    }
+
 
 }

@@ -25,18 +25,23 @@ public class DodoControl {
         mapFormXpath.put("Дата рождения", "//div[text()='Дата ']/following-sibling::input");
         mapFormXpath.put("Телефон", "//div[text()='Телефон']/following-sibling::input");
         mapFormXpath.put("Вконтакте", "//div[text()='Вконтакте']/following-sibling::input");
-        mapFormXpath.put("Вы или ваши знакомые работали в Додо Пицце?", "//div[@class='form__main'][1]//following-sibling::label[@class='main']");
-        mapFormXpath.put("Нет", "//div[@class='form__main'][1]//following-sibling::label[@for='1']");
-        mapFormXpath.put("Да, раньше", "//div[@class='form__main'][1]//following-sibling::label[@for='2']");
-        mapFormXpath.put("Да, прямо сейчас", "//div[@class='form__main'][1]//following-sibling::label[@for='1']");
-        mapFormXpath.put("Что вы готовы проверять?", "//div[@class='form__main'][2]//following-sibling::label[@class='main']");
-        mapFormXpath.put("Ресторан", "//div[@class='form__main'][2]//following-sibling::label[@for='4']");
-        mapFormXpath.put("Доставку", "//div[@class='form__main'][2]//following-sibling::label[@for='5']");
-        mapFormXpath.put("И то, и другое", "//div[@class='form__main'][2]//following-sibling::label[@for='6']");
-        //   mapFormXpath.put("Согласен на обработку персональных данных", "");
-        //   mapFormXpath.put("Согласен на получение рекламных рассылок", "");
         mapFormXpath.put("Отправить", "//button[text()='Отправить']");
 
+    }
+
+    public Map<String, String> mapCheck = new HashMap<>();
+
+    public void setMapCheck() {
+        mapCheck.put("Вы или ваши знакомые работали в Додо Пицце?", "//div[@class='form__main'][1]//following-sibling::label[@class='main']");
+        mapCheck.put("Нет", "//div[@class='form__main'][1]//following-sibling::label[@for='1']");
+        mapCheck.put("Да, раньше", "//div[@class='form__main'][1]//following-sibling::label[@for='2']");
+        mapCheck.put("Да, прямо сейчас", "//div[@class='form__main'][1]//following-sibling::label[@for='3']");
+        mapCheck.put("Что вы готовы проверять?", "//div[@class='form__main'][2]//following-sibling::label[@class='main']");
+        mapCheck.put("Ресторан", "//div[@class='form__main'][2]//following-sibling::label[@for='4']");
+        mapCheck.put("Доставку", "//div[@class='form__main'][2]//following-sibling::label[@for='5']");
+        mapCheck.put("И то, и другое", "//div[@class='form__main'][2]//following-sibling::label[@for='6']");
+        mapCheck.put("Согласен на обработку персональных данных", "");
+        mapCheck.put("Согласен на получение рекламных рассылок", "");
     }
 
     public void setHashSet() {
@@ -160,8 +165,6 @@ public class DodoControl {
     public void checkUpNamesInForm(DataTable dataTable) {
         Map<String, String> mapForm = dataTable.asMap(String.class, String.class);
         setHashMap();
-
-        // for(String sXpath : strXpath){
         mapForm.forEach((k, v) -> {
             System.out.println("k = " + k + " v = " + v);
             mapFormXpath.forEach((kXpath, vXpath) -> {
@@ -179,8 +182,29 @@ public class DodoControl {
                 }
             });
         });
-        // }
+    }
 
+    public void checkFields(List<String> fieldsList) {
+        setMapCheck();
+        ArrayList<String> assertList = new ArrayList<>();
+        mapCheck.forEach((k, v) -> {
+            fieldsList.forEach(s -> {
+                WebElement element;
+                if (s.equals(k)) {
+                    try {
+                        element = PageFactory.getDriver().findElement(By.xpath(v));
+                    //    System.out.println("ELEMENT = " + element.getText() + " and s = " + s + " mapCheck = " + mapCheck.size() + " field = " + assertList.size());
+                        assertList.add(s);
+                        Assert.assertEquals("Text on the form does not match: ", element.getText(), s);
+                    } catch (NoSuchElementException e) {
+                        throw new AutotestException(String.format("Unable to find element %s in the class %s", k, this.getClass().getName()));
+                    }
+                }
+            });
+        });
+        System.out.println("Size mapCheck = " + mapCheck.size() + " size of assert = " + assertList.size());
+        Assert.assertTrue(String.format("Sizes do not match: expected [%s], actual [%s]", mapCheck.size(), assertList.size()),
+                assertList.size() == mapCheck.keySet().size());
     }
 }
 
