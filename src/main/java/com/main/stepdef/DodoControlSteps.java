@@ -19,10 +19,15 @@ public class DodoControlSteps {
     public void checkUpFieldsToFill(DataTable dataTable) {
         dodoControl.checkUpNamesInForm(dataTable);
     }
-    @And ("^проверяем наличие элементов на странице$")
-    public void checkFields(List<String> filedsList){
+
+    @And("^проверяем наличие элементов на странице$")
+    public void checkFields(List<String> filedsList) {
         dodoControl.checkFields(filedsList);
     }
 
+    @And("^заполняем поля формы$")
+    public void fillUpFields(Map<String, String> mapTable) {
+        dodoControl.fillUpForm(mapTable);
+    }
 
 }

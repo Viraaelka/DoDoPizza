@@ -13,18 +13,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MainClassRussianTest extends WrapperPage{
- //   private WebDriver webdriver = com.config.PageFactory.getDriver();
+public class MainClassRussianTest extends WrapperPage {
+    //   private WebDriver webdriver = com.config.PageFactory.getDriver();
 
     public String framePizzaWindow = "//div[@class='popup__dialog-inner']";
 
-    @FindBy (xpath = "(//div[@id='pizzas']//button[1]")
+    @FindBy(xpath = "(//div[@id='pizzas']//button[1]")
     public WebElement chooseButton;
 
-    @FindBy (xpath = "//div[@class='popup__dialog-inner']/descendant::span[contains(@class, ProductCardNameValue)][1]")
+    @FindBy(xpath = "//div[@class='popup__dialog-inner']/descendant::span[contains(@class, ProductCardNameValue)][1]")
     public WebElement titleInChosenWindow;
 
-/* ============================ Applying promocode ==========================================*/
+    /* ============================ Applying promocode ==========================================*/
     @FindBy(xpath = "//div[@class = 'menu__promocode']/descendant-or-self::input")
     public WebElement promocodeInput;
 
@@ -40,7 +40,6 @@ public class MainClassRussianTest extends WrapperPage{
     public MainClassRussianTest(WebDriver driver) {
         super(driver);
     }
-
 
 
     @FindBy(xpath = "//div[@class='popup__dialog-inner']//following-sibling::span")
