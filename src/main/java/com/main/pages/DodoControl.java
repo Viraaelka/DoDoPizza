@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 
@@ -19,19 +21,21 @@ public class DodoControl {
     public Set<String> hashSetXpath = new HashSet<>();
 
     public void setHashMap() {
-        mapFormXpath.put("Страна", "//div[text()='Страна']/following-sibling::span");
-        mapFormXpath.put("Город", "//div[text()='Город']/following-sibling::span");
-        mapFormXpath.put("Адрес пиццерии", "//div[text()='Адрес ']/following-sibling::span//span[@role='combobox']");
-        mapFormXpath.put("Имя", "//div[text()='Имя']/following-sibling::input");
-        mapFormXpath.put("Дата рождения", "//div[text()='Дата ']/following-sibling::input");
-        mapFormXpath.put("Телефон", "//div[text()='Телефон']/following-sibling::input");
-        mapFormXpath.put("Вконтакте", "//div[text()='Вконтакте']/following-sibling::input");
-        mapFormXpath.put("Отправить", "//button[text()='Отправить']");
+        if (mapFormXpath.size() == 0) {
+            mapFormXpath.put("Страна", "//div[text()='Страна']/following-sibling::span");
+            mapFormXpath.put("Город", "//div[text()='Город']/following-sibling::span");
+            mapFormXpath.put("Адрес пиццерии", "//div[text()='Адрес ']/following-sibling::span//span[@role='combobox']");
+            mapFormXpath.put("Имя", "//div[text()='Имя']/following-sibling::input");
+            mapFormXpath.put("Дата рождения", "//div[text()='Дата ']/following-sibling::input");
+            mapFormXpath.put("Телефон", "//div[text()='Телефон']/following-sibling::input");
+            mapFormXpath.put("Вконтакте", "//div[text()='Вконтакте']/following-sibling::input");
+            mapFormXpath.put("Отправить", "//button[text()='Отправить']");
+        }
     }
 
     public void setHashMapForFillingUp() {
         mapFormXpath.put("Страна", "//footer/following::input[@type = 'search']");
-        mapFormXpath.put("СтранаInput", "//footer/following::input[@type = 'search']/parent::span/following::span//li");
+        mapFormXpath.put("СтранаInput", "//footer/following::input[@type = 'search']/parent::span");
         mapFormXpath.put("Имя", "//div[text()='Имя']/following-sibling::input");
         mapFormXpath.put("Дата рождения", "//div[text()='Дата ']/following-sibling::input");
     }
@@ -180,8 +184,6 @@ public class DodoControl {
                 try {
                     if (k.equals(kXpath)) {
                         element = PageFactory.getDriver().findElement(By.xpath(vXpath));
-                        System.out.println("kXpath = " + kXpath + " k = " + k);
-                        System.out.println("ELEMENT = " + element.getText() + " and v = " + v);
                         Assert.assertEquals("Texts do not match", element.getText(), v);
                     }
                 } catch (NoSuchElementException e) {
@@ -200,7 +202,6 @@ public class DodoControl {
                 if (s.equals(k)) {
                     try {
                         element = PageFactory.getDriver().findElement(By.xpath(v));
-                        //    System.out.println("ELEMENT = " + element.getText() + " and s = " + s + " mapCheck = " + mapCheck.size() + " field = " + assertList.size());
                         assertList.add(s);
                         Assert.assertEquals("Text on the form does not match: ", element.getText(), s);
                     } catch (NoSuchElementException e) {
@@ -209,33 +210,38 @@ public class DodoControl {
                 }
             });
         });
-        System.out.println("Size mapCheck = " + mapCheck.size() + " size of assert = " + assertList.size());
         Assert.assertTrue(String.format("Sizes do not match: expected [%s], actual [%s]", mapCheck.size(), assertList.size()),
                 assertList.size() == mapCheck.keySet().size());
     }
 
     public void fillUpForm(Map<String, String> mapTable) {
         setHashMapForFillingUp();
-        mapTable.forEach((k, v) -> {
-            mapFormXpath.forEach((kXpath, vXpath) -> {
+        setHashMap();
+        mapFormXpath.forEach((kXpath, vXpath) -> {
+            mapTable.forEach((k, v) -> {
                 WebElement element;
                 if (k.equals(kXpath)) {
                     try {
                         if (!kXpath.contains("input")) {
+                            //   PageFactory.getDriver().findElement(By.xpath("//div[text()='Страна']/following-sibling::span")).click();
+                            //footer/following::input[@type = 'search']/parent::span
                             element = PageFactory.getDriver().findElement(By.xpath(vXpath));
                             element.sendKeys(v);
                         } else {
                             PageFactory.getDriver().findElement(By.xpath("//div[text()='Страна']/following-sibling::span")).click();
+                            System.out.println("ELSE KXpath = " + kXpath + " vXpath = " + vXpath);
                             element = PageFactory.getDriver().findElement(By.xpath(vXpath));
                             element.sendKeys(v);
-                            PageFactory.getDriver().findElement(By.xpath("//footer/following::input[@type = 'search']/parent::span/following::span//li")).click();
-
+                            //  PageFactory.getDriver().findElement(By.xpath("//footer/following::input[@type = 'search']/parent::span/following::span//li")).click();
                         }
+                        //  PageFactory.getDriver().findElement(By.xpath("//footer/following::input[@type = 'search']/parent::span/following::span//li[1]")).click();
+                        new WebDriverWait(PageFactory.getDriver(), 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(vXpath)));
                     } catch (NoSuchElementException e) {
                         throw new AutotestException(String.format("Unable to find element %s " +
                                 "to populate fields in the class %s", k, this.getClass().getName()));
                     }
-                    Assert.assertEquals("The wrong statement:", element.getText(), v);
+                    System.out.println("element.getText() = " + PageFactory.getDriver().findElement(By.xpath("//div[text()='Имя']/following-sibling::input")).getAttribute("vk.com/asdfg"));
+                    //  Assert.assertEquals("The wrong statement:", element.getText(), v);
                 }
             });
         });

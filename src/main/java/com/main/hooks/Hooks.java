@@ -12,8 +12,8 @@ public class Hooks {
         new PageFactory().setUp();
     }
 
-    @After
-    public void clearData() {
+   // @After
+  /*  public void clearData() {
         new PageFactory().clearData();
-    }
+    } */
 }
