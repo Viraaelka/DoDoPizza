@@ -33,15 +33,8 @@ public class PageFactory {
         return driverPath;
     }
 
-    public void clearData() {
+    public void quitDriver() {
         driver.quit();
     }
 
 }
-
-
-/**
- * First of all input following: "chrome://version/" in the browser then find path "Путь к профилю	/Users/halilovaelvira/Library/Application"
- * <p>
- * chrome://version/
- */

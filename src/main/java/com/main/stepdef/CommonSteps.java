@@ -24,4 +24,13 @@ public class CommonSteps {
     public void checkNavigationMenu() {
         wrapperPage.checkNavigationMenu();
     }
+    @And("^checking what is going on when the mouse is navigated to the MyOrder button$")
+    public void myOrderButtonNavigating(){
+        wrapperPage.myOrderButtonNavigating();
+    }
+
+    @And("^test$")
+    public void click(){
+        wrapperPage.click();
+    }
 }
