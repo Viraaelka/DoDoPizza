@@ -5,7 +5,6 @@ import com.main.pages.WrapperPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.java.ru.Когда;
-import com.main.pages.MainClassRussianTest;
 
 public class CommonSteps {
     WrapperPage wrapperPage = org.openqa.selenium.support.PageFactory.initElements(PageFactory.getDriver(), WrapperPage.class);
