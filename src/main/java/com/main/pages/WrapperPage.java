@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 
@@ -21,7 +23,7 @@ public class WrapperPage {
     public WebElement termAndConditionLink;
 
     @FindBy(xpath = "//div[@class='footer__bottom-navigation']/a[2]")
-    public WebElement DodoPizzaStoryLink;
+    public WebElement dodoPizzaStoryLink;
 
     @FindBy(xpath = "//div[@class='footer__social']/a[2]")
     public WebElement instagramLink;
@@ -70,7 +72,34 @@ public class WrapperPage {
             throw new AutotestException("Unable to find the pop up window when navigating to My Oder button");
         }
     }
-    public void click(){
-        instagramLink.click();
+
+    public void clickToVerifyPage(String pageName) {
+        String pageUrl = "";
+        WebElement element = null;
+        switch (pageName) {
+            case "Facebook":
+                element = facebookLink;
+                pageUrl = "https://www.facebook.com/dodopizzaoxford/";
+            case "Terms and conditions":
+                element = termAndConditionLink;
+                pageUrl = "https://docs.google.com/document/d/1Q-6ZCaoZcWhN-EUybJ1RD17_fniEdSyL-cprnja5OYA/edit";
+            case "Dodo Pizza Story":
+                element = dodoPizzaStoryLink;
+                pageUrl = "https://dodopizzastory.com/";
+        }
+        new Actions(PageFactory.getDriver()).moveToElement(element).build().perform();
+        switchToPage(element);
+        Assert.assertTrue(String.format("Unable to reach %s page; expected: %s, actual: %s ", pageName,
+                PageFactory.getDriver().getCurrentUrl(), pageUrl),
+                pageUrl.equals(PageFactory.getDriver().getCurrentUrl()));
+    }
+
+    public void switchToPage(WebElement element) {
+        Set<String> oldWindowsSet = driver.getWindowHandles();
+        element.click();
+        Set<String> newWindowsSet = driver.getWindowHandles();
+        newWindowsSet.removeAll(oldWindowsSet);
+        String newWindowHandle = newWindowsSet.iterator().next();
+        driver.switchTo().window(newWindowHandle);
     }
 }
