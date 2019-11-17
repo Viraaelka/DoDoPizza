@@ -33,4 +33,8 @@ public class CommonSteps {
     public void clickToVerifyPage(String pageName) {
         wrapperPage.clickToVerifyPage(pageName);
     }
+    @And("^checking if the Camera container appears when the Live button is clicked$")
+    public void checkCameraContainer(){
+        wrapperPage.checkCameraContainer();
+    }
 }

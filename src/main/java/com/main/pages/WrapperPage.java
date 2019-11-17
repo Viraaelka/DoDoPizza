@@ -32,6 +32,8 @@ public class WrapperPage {
     @FindBy(xpath = "//div[@class='footer__social']/a[contains(@href, 'facebook')]")
     public WebElement facebookLink;
 
+    @FindBy(xpath = "//div[contains(@class, 'CameraLiveContainer')]")
+    public WebElement liveButton;
 
     List<WebElement> navigationList;
 
@@ -109,5 +111,11 @@ public class WrapperPage {
                 pageUrl, PageFactory.getDriver().getCurrentUrl()),
                 pageUrl.equals(PageFactory.getDriver().getCurrentUrl()));
         driver.switchTo().window(oldWindowsSet.iterator().next());
+    }
+
+    public void checkCameraContainer() {
+        new Actions(PageFactory.getDriver()).moveToElement(liveButton).build().perform();
+        liveButton.click();
+
     }
 }
