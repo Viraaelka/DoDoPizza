@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
@@ -19,16 +20,16 @@ public class WrapperPage {
     @FindBy(xpath = "//button[text()='My order']")
     public WebElement myOrderButton;
 
-    @FindBy(xpath = "//div[@class='footer__bottom-navigation']/a[1]")
+    @FindBy(xpath = "//div[@class='footer__bottom-navigation']/a[contains(@href, 'document')]")
     public WebElement termAndConditionLink;
 
-    @FindBy(xpath = "//div[@class='footer__bottom-navigation']/a[2]")
+    @FindBy(xpath = "//div[@class='footer__bottom-navigation']/a[contains(@href, 'dodopizzastory')]")
     public WebElement dodoPizzaStoryLink;
 
-    @FindBy(xpath = "//div[@class='footer__social']/a[2]")
+    @FindBy(xpath = "//div[@class='footer__social']/a[contains(@href, 'instagram')]")
     public WebElement instagramLink;
 
-    @FindBy(xpath = "//div[@class='footer__social']/a[1]")
+    @FindBy(xpath = "//div[@class='footer__social']/a[contains(@href, 'facebook')]")
     public WebElement facebookLink;
 
 
@@ -76,30 +77,40 @@ public class WrapperPage {
     public void clickToVerifyPage(String pageName) {
         String pageUrl = "";
         WebElement element = null;
+        System.out.println("PAGENAME = " + pageName);
         switch (pageName) {
-            case "Facebook":
+            case "Facebook": {
                 element = facebookLink;
-                pageUrl = "https://www.facebook.com/dodopizzaoxford/";
-            case "Terms and conditions":
+                pageUrl = "https://www.facebook.com/dodopizzamp/";
+                break;
+            }
+            case "Instagram": {
+                element = instagramLink;
+                pageUrl = "https://www.instagram.com/dodopizzamemphis/";
+                break;
+            }
+            case "Terms and conditions": {
                 element = termAndConditionLink;
                 pageUrl = "https://docs.google.com/document/d/1Q-6ZCaoZcWhN-EUybJ1RD17_fniEdSyL-cprnja5OYA/edit";
-            case "Dodo Pizza Story":
+                break;
+            }
+            case "Dodo Pizza Story": {
                 element = dodoPizzaStoryLink;
                 pageUrl = "https://dodopizzastory.com/";
+                break;
+            }
         }
+        new WebDriverWait(PageFactory.getDriver(), 5).until(ExpectedConditions.visibilityOf(element));
         new Actions(PageFactory.getDriver()).moveToElement(element).build().perform();
-        switchToPage(element);
-        Assert.assertTrue(String.format("Unable to reach %s page; expected: %s, actual: %s ", pageName,
-                PageFactory.getDriver().getCurrentUrl(), pageUrl),
-                pageUrl.equals(PageFactory.getDriver().getCurrentUrl()));
-    }
-
-    public void switchToPage(WebElement element) {
         Set<String> oldWindowsSet = driver.getWindowHandles();
         element.click();
         Set<String> newWindowsSet = driver.getWindowHandles();
         newWindowsSet.removeAll(oldWindowsSet);
         String newWindowHandle = newWindowsSet.iterator().next();
         driver.switchTo().window(newWindowHandle);
+        Assert.assertTrue(String.format("Unable to reach %s page; expected: %s, actual: %s ", pageName,
+                pageUrl, PageFactory.getDriver().getCurrentUrl()),
+                pageUrl.equals(PageFactory.getDriver().getCurrentUrl()));
+        driver.switchTo().window(oldWindowsSet.iterator().next());
     }
 }
