@@ -51,12 +51,9 @@ public class WrapperPage {
 
     public void checkNavigationMenu() {
         if (getList().size() != 0) {
-            //   Assert.assertTrue("The arrays do not fully match ",
-            //         Collections.addAll(navigationList, Arrays.toString(navigationNames)));
             Assert.assertTrue("The size of String[] array does not match navigationList, expected = "
                             + navigationNames.length + " actual = " + getList().size(),
                     navigationNames.length == getList().size());
-
         } else
             throw new AutotestException("The navigition menu is not full, some elements are missing");
     }
