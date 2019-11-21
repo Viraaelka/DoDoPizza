@@ -10,4 +10,5 @@ Feature: Check what would be if I move to My Order button
 
   @live
   Scenario: Check the Live button
+    When we go to DodoPage and turn off cookies
     And checking if the Camera container appears when the Live button is clicked

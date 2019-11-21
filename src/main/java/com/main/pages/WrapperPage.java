@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class WrapperPage {
     private WebDriver driver = PageFactory.getDriver();
@@ -44,7 +46,7 @@ public class WrapperPage {
     }
 
     public void turnOffCokies() {
-        PageFactory.getDriver().findElement(By.xpath("//div[@class='cookie-policy']//button")).click();
+        PageFactory.getDriver().findElement(By.xpath("//div[contains(@class,'cookie-policy')]//button")).click();
     }
 
     public List<WebElement> getList() {
@@ -114,8 +116,14 @@ public class WrapperPage {
     }
 
     public void checkCameraContainer() {
-        new Actions(PageFactory.getDriver()).moveToElement(liveButton).build().perform();
-        liveButton.click();
+        WebElement element;
+        if (getList() != null) {
+            //  element = getList().stream().filter(elem -> elem.getText().equals("Live")).
+            //  element = getList().get("List");
+            element = PageFactory.getDriver().findElement(By.xpath("//div[@class='navigation__inner']//*[text()='Live']"));
+            new Actions(PageFactory.getDriver()).moveToElement(element).build().perform();
+            element.click();
 
+        }
     }
 }
