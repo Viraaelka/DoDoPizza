@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 public class WrapperPage {
     private WebDriver driver = PageFactory.getDriver();
+    //   public static final LoggerFactory LOG = LoggerFactory.getLogger(WrapperPage.class);
 
     @FindBy(xpath = "//button[text()='My order']")
     public WebElement myOrderButton;
@@ -37,6 +38,11 @@ public class WrapperPage {
     @FindBy(xpath = "//div[contains(@class, 'CameraLiveContainer')]")
     public WebElement liveButton;
 
+    @FindBy(xpath = "//div[contains(@class,'cookie-policy')]//button")
+    public WebElement cookieElement;
+
+    private String pizzaPath = "//div[@class='product__inner']/div[text()='%s']";
+
     List<WebElement> navigationList;
 
     public String[] navigationNames = {"Pizza", "Snacks", "Desserts", "Drinks", "Deals", "Store info", "Live"};
@@ -46,7 +52,15 @@ public class WrapperPage {
     }
 
     public void turnOffCokies() {
-        PageFactory.getDriver().findElement(By.xpath("//div[contains(@class,'cookie-policy')]//button")).click();
+        String cookieXpath = "//div[contains(@class,'cookie-policy')]//button";
+        WebElement el = PageFactory.getDriver().findElement(By.xpath(".//*[contains(text(),'cookie')]"));
+        try {
+            Assert.assertTrue("Cookie button is not present on the Home page", isElementPresent(cookieElement));
+            cookieElement.click();
+        } catch (AutotestException | NoSuchElementException e) {
+            System.out.println("Cookie button has been not found at the Home page");
+        }
+        Assert.assertTrue("Cookie button is still visible on the Home page", isElementNotPresent(el));
     }
 
     public List<WebElement> getList() {
@@ -119,11 +133,42 @@ public class WrapperPage {
         WebElement element;
         if (getList() != null) {
             //  element = getList().stream().filter(elem -> elem.getText().equals("Live")).
-            //  element = getList().get("List");
+            //  element = getList().g
+            // et("List");
             element = PageFactory.getDriver().findElement(By.xpath("//div[@class='navigation__inner']//*[text()='Live']"));
             new Actions(PageFactory.getDriver()).moveToElement(element).build().perform();
             element.click();
+        }
+        Assert.assertTrue("Cannot find Camera container when the Live button is clicked", isElementPresent(liveButton));
+    }
 
+    public void selectPizza(String pizzaName) {
+        WebElement pizzaElement;
+        try {
+            pizzaElement = PageFactory.getDriver().findElement(By.xpath(String.format(pizzaPath, pizzaName)));
+        } catch (NoSuchElementException e) {
+
+        }
+    }
+
+    public boolean isElementNotPresent(WebElement element) {
+        try {
+            new WebDriverWait(PageFactory.getDriver(), 5)
+                    .until(ExpectedConditions.invisibilityOf(element));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean isElementPresent(WebElement element) {
+        try {
+            new WebDriverWait(PageFactory.getDriver(), 5)
+                    .until(ExpectedConditions.visibilityOf(element));
+            element.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
         }
     }
 }
