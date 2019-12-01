@@ -41,7 +41,7 @@ public class WrapperPage {
     @FindBy(xpath = "//div[contains(@class,'cookie-policy')]//button")
     public WebElement cookieElement;
 
-    private String pizzaPath = "//div[@class='product__inner']/div[text()='%s']";
+    private String pizzaPath = "//div[text()='%s']//parent::div//button";
 
     List<WebElement> navigationList;
 
@@ -146,6 +146,9 @@ public class WrapperPage {
         WebElement pizzaElement;
         try {
             pizzaElement = PageFactory.getDriver().findElement(By.xpath(String.format(pizzaPath, pizzaName)));
+            pizzaElement.click();
+            Assert.assertTrue("Cannot find the element " + pizzaName, isElementPresent(PageFactory.getDriver().
+                    findElement(By.xpath("//span[text()='" + pizzaName + "']"))));
         } catch (NoSuchElementException e) {
 
         }

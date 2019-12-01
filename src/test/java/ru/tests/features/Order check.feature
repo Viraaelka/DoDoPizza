@@ -9,10 +9,10 @@ Feature: Check what would be if I move to My Order button
   Scenario: Check what would be if I move to My Order button
     And checking what is going on when the mouse is navigated to the MyOrder button
 
-  @makeOrder
-  Scenario: Making an order
-    And choosing "Pepperoni" pizza
-
   @live
   Scenario: Check the Live button
     And checking if the Camera container appears when the Live button is clicked
+
+  @makeOrder
+  Scenario: Making an order
+    And choosing "Pepperoni" pizza
