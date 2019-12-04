@@ -7,7 +7,7 @@ import io.cucumber.junit.Cucumber;
 @CucumberOptions(monochrome = true,
         features = {"src/test/java/ru/tests/features"},
         glue = {"com.main"},
-        tags = {"@live"}
+        tags = {"@makeOrder"}
 )
 
 // class name should end with the word "Test" otherwise it would be launched!

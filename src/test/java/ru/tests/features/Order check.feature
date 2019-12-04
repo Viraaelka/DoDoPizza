@@ -16,3 +16,6 @@ Feature: Check what would be if I move to My Order button
   @makeOrder
   Scenario: Making an order
     And choosing "Pepperoni" pizza
+    And checking the size and the kind of pastry
+      | Size           | 10                |
+      | Kind of pastry | Traditional crust |

@@ -1,7 +1,9 @@
 package com.main.stepdef;
 
 import com.config.PageFactory;
+import com.main.pages.ProductCard;
 import com.main.pages.WrapperPage;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.java.ru.Когда;
@@ -43,4 +45,5 @@ public class CommonSteps {
     public void selectPizza(String pizzaName) {
         wrapperPage.selectPizza(pizzaName);
     }
+
 }
