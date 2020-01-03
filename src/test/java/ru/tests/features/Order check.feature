@@ -19,3 +19,4 @@ Feature: Check what would be if I move to My Order button
     And checking the size and the kind of pastry
       | Size           | 10                |
       | Kind of pastry | Traditional crust |
+    And changing the size of the pizaa to "14"

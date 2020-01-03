@@ -8,16 +8,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class ProductCard extends WrapperPage {
-
+    public static String xpathEnd = "//div[contains(@class, 'ProductCard')]//span[contains(text(), '%s')]";
     public ProductCard(WebDriver driver) {
         super(driver);
     }
 
     public void checkSizeAndPastry(DataTable dataTable) {
         Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
-        String xpathEnd = "//div[contains(@class, 'ProductCard')]//span[contains(text(), '%s')]";
         dataMap.forEach((k, v) -> {
             WebElement element = null;
             switch (k) {
@@ -31,5 +31,13 @@ public class ProductCard extends WrapperPage {
                     break;
             }
         });
+    }
+    public void changePizzaDiameter(String size){
+        WebElement element;
+        try{
+            element = PageFactory.getDriver().findElement(By.xpath(String.format(xpathEnd, size)));
+            element.click();
+            System.out.println("Click = " + element.getText());
+        }catch (NoSuchElementException e){}
     }
 }

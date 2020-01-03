@@ -12,4 +12,8 @@ public class ProductCardSteps {
     public void checkSizeAndPastry(DataTable dataTable){
         productCard.checkSizeAndPastry(dataTable);
     }
+    @And("^changing the size of the pizaa to \"([^\"]*)\"$")
+    public void changePizzaDiameter(String size){
+        productCard.changePizzaDiameter(size);
+    }
 }

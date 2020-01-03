@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PageFactory {
     private static WebDriver driver;
-    private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
+    private static String driverPath = "/home/aelya/Загрузки/chromedriver";
     public static String website = "https://dodopizza.com/germantown";
     //  public static String website = "https://dodopizza.ru/petergof/";
 
