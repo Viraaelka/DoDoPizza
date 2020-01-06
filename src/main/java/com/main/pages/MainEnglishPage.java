@@ -8,6 +8,4 @@ public class MainEnglishPage extends WrapperPage {
     public MainEnglishPage(WebDriver driver) {
         super(driver);
     }
-
-
 }

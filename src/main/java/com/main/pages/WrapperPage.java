@@ -8,19 +8,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class WrapperPage {
     private WebDriver driver = PageFactory.getDriver();
     //   public static final LoggerFactory LOG = LoggerFactory.getLogger(WrapperPage.class);
 
-    @FindBy(xpath = "//button[text()='My order']")
+    public static final String myButtonXpath = "//button[text()='My order']";
+
+    @FindBy(xpath = myButtonXpath)
     public WebElement myOrderButton;
 
     @FindBy(xpath = "//div[@class='footer__bottom-navigation']/a[contains(@href, 'document')]")

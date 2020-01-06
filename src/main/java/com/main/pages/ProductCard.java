@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class ProductCard extends WrapperPage {
-    public static String xpathEnd = "//div[contains(@class, 'ProductCard')]//span[contains(text(), '%s')]";
+    public static String productXpath = "//div[contains(@class, 'ProductCard')]//*[contains(text(), '%s')]";
+    public static String pizzaCounter = myButtonXpath + "/div[@data-quantity='%s']";
+
     public ProductCard(WebDriver driver) {
         super(driver);
     }
@@ -22,22 +24,30 @@ public class ProductCard extends WrapperPage {
             WebElement element = null;
             switch (k) {
                 case "Size":
-                    element = PageFactory.getDriver().findElement(By.xpath(String.format(xpathEnd, v)));
+                    element = PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, v)));
                     Assert.assertEquals("Incorrect value of size and pastry", element.getText().replaceAll("\\D", ""), v);
                     break;
                 case "Kind of pastry":
-                    element = PageFactory.getDriver().findElement(By.xpath(String.format(xpathEnd, v)));
+                    element = PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, v)));
                     Assert.assertEquals("Incorrect value of size and pastry", element.getText().replaceAll("\\d+\\W+", ""), v.toLowerCase());
                     break;
             }
         });
     }
-    public void changePizzaDiameter(String size){
+
+    public void changePizzaDiameter(String size) {
         WebElement element;
-        try{
-            element = PageFactory.getDriver().findElement(By.xpath(String.format(xpathEnd, size)));
+        String endXpath = "//label[contains(text(), '%s')]";
+        try {
+            element = PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, size)));
             element.click();
-            System.out.println("Click = " + element.getText());
-        }catch (NoSuchElementException e){}
+        } catch (NoSuchElementException e) {
+        }
+    }
+    public void addProductToCart(){
+        PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, "Add to cart"))).click();
+    }
+    public void checkPizzaAmount(String pizzaAmount){
+
     }
 }
