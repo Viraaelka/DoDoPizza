@@ -13,6 +13,7 @@ public class ProductCardSteps {
     public void checkSizeAndPastry(DataTable dataTable){
         productCard.checkSizeAndPastry(dataTable);
     }
+
     @And("^changing the size of the pizaa to \"([^\"]*)\"$")
     public void changePizzaDiameter(String size){
         productCard.changePizzaDiameter(size);
@@ -22,6 +23,7 @@ public class ProductCardSteps {
     public void addProductToCart(){
         productCard.addProductToCart();
     }
+
     @Then("^the amount of pizza added equals \"([^\"]*)\"$")
     public void checkPizzaAmount(String pizzaAmount){
         productCard.checkPizzaAmount(pizzaAmount);
