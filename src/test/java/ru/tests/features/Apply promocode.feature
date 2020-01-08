@@ -1,9 +1,12 @@
 #language: en
 
-  Feature: Applying a promocode for giveaway pizza
+  Feature: Applying a giveaway codes
 
     @sale
-    Scenario: Applying a promocode
+    Scenario: Applying a giveaway code
 
       When we go to DodoPage and turn off cookies
+      # todo
       And checking titles on the navigation menu
+
+
