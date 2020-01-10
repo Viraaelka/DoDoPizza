@@ -5,6 +5,7 @@
 
       @addtocart
       Scenario: Add a few items to cart being on the main page
-        Then clicking Add To Cart to choose "Supreme" pizza
-        And clicking Add To Cart to choose "Chicken Salad" item
-        And clicking Add To Cart to choose "Mountain Dew" beverage
+        Then clicking "Add To Cart" to choose "Supreme" pizza
+        And clicking "Add To Cart" to choose "Chicken Salad" item
+        And clicking "Add To Cart" to choose "Mountain Dew" beverage
+uu
