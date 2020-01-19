@@ -1,11 +1,16 @@
 #language: en
-  Feature: Add a few items to cart
-    Background:
-      When we go to DodoPage and turn off cookies
+Feature: Add a few items to cart
 
-      @addtocart
-      Scenario: Add a few items to cart being on the main page
-        Then clicking "Add To Cart" to choose "Supreme" pizza
-        And clicking "Add To Cart" to choose "Chicken Salad" item
-        And clicking "Add To Cart" to choose "Mountain Dew" beverage
-uu
+  Background:
+    When we go to DodoPage and turn off cookies
+
+  @addtocart
+  Scenario: Add a few items to cart being on the main page
+    Then clicking 'Add To Cart' to choose "Garden Fresh salad" item at the price "5.99"
+    And checking if the necessary product has been 'Added'
+    Then clicking 'Add To Cart' to choose "New York Cheesecake" item at the price "3.25"
+    And checking if the necessary product has been 'Added'
+    Then clicking 'Add To Cart' to choose "Dr. Pepper can" item at the price "1.29"
+    And checking if the necessary product has been 'Added'
+    Then clicking 'Add To Cart' to choose "Mountain Dew" beverage at the price "2.49"
+    And checking if the necessary product has been 'Added'

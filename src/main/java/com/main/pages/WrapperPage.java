@@ -173,4 +173,14 @@ public class WrapperPage {
             return false;
         }
     }
+
+    public boolean isElementToBeClickable(WebElement element) {
+        try {
+            new WebDriverWait(PageFactory.getDriver(), 5)
+                    .until(ExpectedConditions.elementToBeClickable(element));
+            return false;
+        } catch (NoSuchElementException e) {
+            return true;
+        }
+    }
 }
