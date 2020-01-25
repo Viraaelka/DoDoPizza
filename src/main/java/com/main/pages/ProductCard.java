@@ -7,11 +7,15 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class ProductCard extends WrapperPage {
+    public static final Logger LOG = LoggerFactory.getLogger(ProductCard.class);
+
     public static String productXpath = "//div[contains(@class, 'ProductCard')]//*[contains(text(), '%s')]";
     public static String pizzaMyButtonCounter = myButtonXpath + "/div[@data-quantity='%s']";
 
@@ -33,6 +37,7 @@ public class ProductCard extends WrapperPage {
                     Assert.assertEquals("Incorrect value of size and pastry", element.getText().replaceAll("\\d+\\W+", ""), v.toLowerCase());
                     break;
             }
+            LOG.info("You have chosen the pizza with following parameters: " + k + ": " + v);
         });
     }
 
@@ -42,17 +47,20 @@ public class ProductCard extends WrapperPage {
         try {
             element = PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, size)));
             element.click();
+            LOG.info("The button " + element.getText() + " has been clicked");
         } catch (NoSuchElementException e) {
         }
     }
     public void addProductToCart(){
-        PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, "Add to cart"))).click();
+        PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, "Add to basket"))).click();
+        LOG.info("The pizza has been added to the basket");
     }
     public void checkPizzaAmount(String pizzaAmount){
         WebElement element;
         try{
             element = PageFactory.getDriver().findElement(By.xpath(String.format(pizzaMyButtonCounter, pizzaAmount)));
             Assert.assertEquals("The amount of pizza is not equal to the choosen one", element.getText(), pizzaAmount);
+         // todo   LOG.info("The pizza ");
         }
         catch (NoSuchElementException e){
             throw new AutotestException("Unable to determine the amount of pizza selected");

@@ -9,6 +9,11 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -53,5 +58,19 @@
             <version>4.7.4</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Logger binding: both dependencies shpuld be added for correct work: slf4j-api and slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>

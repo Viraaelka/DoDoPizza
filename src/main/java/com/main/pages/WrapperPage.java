@@ -10,12 +10,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class WrapperPage {
+    public static final Logger LOG = LoggerFactory.getLogger(WrapperPage.class);
+
     private WebDriver driver = PageFactory.getDriver();
-    //   public static final LoggerFactory LOG = LoggerFactory.getLogger(WrapperPage.class);
 
     public static final String myButtonXpath = "//button[text()='My order']";
 
@@ -38,9 +41,9 @@ public class WrapperPage {
     public WebElement liveButton;
 
     @FindBy(xpath = "//div[contains(@class,'cookie-policy')]//button")
-    public WebElement cookieElement;
+    public WebElement cookieExitButton;
 
-    private String pizzaPath = "//div[text()='%s']//parent::div//button";
+    private String pizzaPath = "//div[@class='container']//div[text()='%s']//parent::div//button/parent::div";
 
     List<WebElement> navigationList;
 
@@ -51,15 +54,15 @@ public class WrapperPage {
     }
 
     public void turnOffCokies() {
-        String cookieXpath = "//div[contains(@class,'cookie-policy')]//button";
-        WebElement el = PageFactory.getDriver().findElement(By.xpath(".//*[contains(text(),'cookie')]"));
+        String cookieBodyXpath = "//div[contains(@class,'cookie-policy')]";
         try {
-            Assert.assertTrue("Cookie button is not present on the Home page", isElementPresent(cookieElement));
-            cookieElement.click();
-        } catch (AutotestException | NoSuchElementException e) {
-            System.out.println("Cookie button has been not found at the Home page");
+            Assert.assertTrue("Cookie button is not present on the Home page", isElementPresent(cookieExitButton));
+            cookieExitButton.click();
+        } catch (NoSuchElementException e) {
+            LOG.error("Cookie button has been not found on the Home page");
         }
-        Assert.assertTrue("Cookie button is still visible on the Home page", isElementNotPresent(el));
+        Assert.assertTrue("Cookie popup is still present on the Home page", isElementNotPresent(cookieBodyXpath));
+        LOG.info("We have accepted \"cookies\" terms and conditions");
     }
 
     public List<WebElement> getList() {
@@ -144,6 +147,7 @@ public class WrapperPage {
     public void selectPizza(String pizzaName) {
         WebElement pizzaElement;
         try {
+            // todo via JSExecutor
             pizzaElement = PageFactory.getDriver().findElement(By.xpath(String.format(pizzaPath, pizzaName)));
             pizzaElement.click();
             Assert.assertTrue("Cannot find the element " + pizzaName, isElementPresent(PageFactory.getDriver().
@@ -153,10 +157,10 @@ public class WrapperPage {
         }
     }
 
-    public boolean isElementNotPresent(WebElement element) {
+    public boolean isElementNotPresent(String xpathLocator) {
         try {
             new WebDriverWait(PageFactory.getDriver(), 5)
-                    .until(ExpectedConditions.invisibilityOf(element));
+                    .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathLocator)));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -173,7 +177,7 @@ public class WrapperPage {
             return false;
         }
     }
-
+// todo try to remove this method and use isElementNotPresent for correct work
     public boolean isElementToBeClickable(WebElement element) {
         try {
             new WebDriverWait(PageFactory.getDriver(), 5)
