@@ -3,19 +3,20 @@ package com.main.pages;
 import com.config.PageFactory;
 import com.main.exceptions.AutotestException;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class DodoControl {
+    public static final Logger LOG = LoggerFactory.getLogger(DodoControl.class);
+
     private String xpath = "//div[text()='%s']/following-sibling::span";
     public Map<String, String> mapFormXpath = new HashMap<>();
     public Set<String> hashSetXpath = new HashSet<>();
