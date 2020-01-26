@@ -60,7 +60,7 @@ public class ProductCard extends WrapperPage {
         try{
             element = PageFactory.getDriver().findElement(By.xpath(String.format(pizzaMyButtonCounter, pizzaAmount)));
             Assert.assertEquals("The amount of pizza is not equal to the choosen one", element.getText(), pizzaAmount);
-         // todo   LOG.info("The pizza ");
+            LOG.info("The amount of chosen items is equal to " + pizzaAmount);
         }
         catch (NoSuchElementException e){
             throw new AutotestException("Unable to determine the amount of pizza selected");
