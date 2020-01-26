@@ -43,7 +43,11 @@ public class WrapperPage {
     @FindBy(xpath = "//div[contains(@class,'cookie-policy')]//button")
     public WebElement cookieExitButton;
 
+    @FindBy(xpath = "//span[text()='Pizza delivery']/parent::div//a")
+    public WebElement cityPizzaElement;
+
     private String pizzaPath = "//div[@class='container']//div[text()='%s']//parent::div//button/parent::div";
+    private String cityXpath = "//h1[text()='Choose your city']//ancestor::div//a[contains(text(),'%s')]";
 
     List<WebElement> navigationList;
 
@@ -51,6 +55,31 @@ public class WrapperPage {
 
     public WrapperPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public void chooseCityPage(String cityName) {
+        try {
+            WebElement cityElement;
+            if (isElementPresent(cityPizzaElement)) {
+                cityPizzaElement.click();
+            }
+            cityElement = PageFactory.getDriver().findElement(By.xpath(String.format(cityXpath, cityName)));
+            cityElement.click();
+            LOG.info("The city \"" + cityName + "\" has been chosen");
+        } catch (NoSuchElementException e) {
+            throw new AutotestException("No such a city as \"" + "\" in the city list");
+        }
+    }
+
+    public void checkCityPage(String cityName) {
+        try {
+            WebElement cityElemOnHomePage = PageFactory.getDriver().findElement(By.xpath("//a[contains(text(),'" + cityName + "')]"));
+            Assert.assertTrue("The city displayed on the home page does not match the expected one",
+                    cityElemOnHomePage.getText().contains(cityName));
+            LOG.info("We have made sure that the city \"" + cityName + "\" had been selected before");
+        } catch (NoSuchElementException e) {
+            throw new AutotestException("The displayed city is not as expected");
+        }
     }
 
     public void turnOffCokies() {
@@ -177,7 +206,8 @@ public class WrapperPage {
             return false;
         }
     }
-// todo try to remove this method and use isElementNotPresent for correct work
+
+    // todo try to remove this method and use isElementNotPresent for correct work
     public boolean isElementToBeClickable(WebElement element) {
         try {
             new WebDriverWait(PageFactory.getDriver(), 5)
