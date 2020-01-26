@@ -82,6 +82,15 @@ public class WrapperPage {
         }
     }
 
+    public void clickOnNavigationItem(String navigationItemName) {
+        WebElement elementIem;
+        try { // todo -> not finished yet!
+            //    Stream.of(navigationNames).filter(item ->)
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void turnOffCokies() {
         String cookieBodyXpath = "//div[contains(@class,'cookie-policy')]";
         try {
@@ -91,7 +100,7 @@ public class WrapperPage {
             LOG.error("Cookie button has been not found on the Home page");
         }
         Assert.assertTrue("Cookie popup is still present on the Home page", isElementNotPresent(cookieBodyXpath));
-        LOG.info("We have accepted \"cookies\" terms and conditions");
+        LOG.info("We have accepted \"cookies\" terms and conditions and closed the popup message");
     }
 
     public List<WebElement> getList() {
@@ -120,21 +129,34 @@ public class WrapperPage {
         }
     }
 
-    public void clickToVerifyPage(String pageName) {
+    public void clickToVerifyPage(String pageName, String city) {
         String pageUrl = "";
         WebElement element = null;
-        System.out.println("PAGENAME = " + pageName);
+        LOG.info("The social network for testing is " + pageName);
+        if (city.equals("Germantown")) {
+            switch (pageName) {
+                case "Facebook": {
+                    element = facebookLink;
+                    pageUrl = "https://www.facebook.com/dodopizzamp/";
+                    break;
+                }
+                case "Instagram": {
+                    element = instagramLink;
+                    pageUrl = "https://www.instagram.com/dodopizzamemphis/";
+                    break;
+                }
+            }
+        } else if (city.equals("Oxford")) {
+            switch (pageName) {
+                case "Facebook": {
+                    element = facebookLink;
+                    pageUrl = "https://www.facebook.com/dodopizzaoxford/";
+                    break;
+                }
+            }
+        } else
+            throw new AutotestException("No such a city is presented in social networks");
         switch (pageName) {
-            case "Facebook": {
-                element = facebookLink;
-                pageUrl = "https://www.facebook.com/dodopizzamp/";
-                break;
-            }
-            case "Instagram": {
-                element = instagramLink;
-                pageUrl = "https://www.instagram.com/dodopizzamemphis/";
-                break;
-            }
             case "Terms and conditions": {
                 element = termAndConditionLink;
                 pageUrl = "https://docs.google.com/document/d/1Q-6ZCaoZcWhN-EUybJ1RD17_fniEdSyL-cprnja5OYA/edit";
@@ -157,6 +179,7 @@ public class WrapperPage {
         Assert.assertTrue(String.format("Unable to reach %s page; expected: %s, actual: %s ", pageName,
                 pageUrl, PageFactory.getDriver().getCurrentUrl()),
                 pageUrl.equals(PageFactory.getDriver().getCurrentUrl()));
+        LOG.info("We have checked that the page \"" + pageName + "\" had followed the correct webpage");
         driver.switchTo().window(oldWindowsSet.iterator().next());
     }
 

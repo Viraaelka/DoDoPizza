@@ -30,9 +30,9 @@ public class CommonSteps {
         wrapperPage.myOrderButtonNavigating();
     }
 
-    @And("^verifying that we get to \"([^\"]*)\" page$")
-    public void clickToVerifyPage(String pageName) {
-        wrapperPage.clickToVerifyPage(pageName);
+    @And("^verifying that we get to \"([^\"]*)\" page for \"([^\"]*)\"$")
+    public void clickToVerifyPage(String pageName, String city){
+        wrapperPage.clickToVerifyPage(pageName, city);
     }
 
     @And("^checking if the Camera container appears when the Live button is clicked$")

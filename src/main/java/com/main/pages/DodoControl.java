@@ -178,7 +178,6 @@ public class DodoControl {
                         throw new AutotestException(String.format("Unable to find element %s " +
                                 "to populate fields in the class %s", k, this.getClass().getName()));
                     }
-                    //    System.out.println("element.getText() = " + PageFactory.getDriver().findElement(By.xpath("//div[text()='Имя']/following-sibling::input")).getAttribute("vk.com/asdfg"));
                 }
             });
         });
