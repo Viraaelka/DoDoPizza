@@ -23,9 +23,18 @@ public class ProductCardSteps {
     public void addProductToCart(){
         productCard.addProductToCart();
     }
-
     @Then("^the amount of pizza added equals \"([^\"]*)\"$")
     public void checkPizzaAmount(String pizzaAmount){
         productCard.checkPizzaAmount(pizzaAmount);
     }
+
+    @And("^adding the topping \"([^\"]*)\"$")
+    public void addToppings(String toppingName){
+        productCard.addToppings(toppingName);
+    }
+    @Then("^checking that the toppping \"([^\"]*)\" has been added to cart$")
+    public void checkToppings(String toppingName){
+        productCard.checkToppings(toppingName);
+    }
+
 }
