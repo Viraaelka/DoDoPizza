@@ -18,6 +18,7 @@ public class ProductCard extends WrapperPage {
 
     public static String productXpath = "//div[contains(@class, 'ProductCard')]//*[contains(text(), '%s')]";
     public static String pizzaMyButtonCounter = myButtonXpath + "/div[@data-quantity='%s']";
+    private static String extraToppingXpath = "//span[text()='%s']";
 
     public ProductCard(WebDriver driver) {
         super(driver);
@@ -51,19 +52,45 @@ public class ProductCard extends WrapperPage {
         } catch (NoSuchElementException e) {
         }
     }
-    public void addProductToCart(){
+
+    public void addProductToCart() {
         PageFactory.getDriver().findElement(By.xpath(String.format(productXpath, "Add to basket"))).click();
         LOG.info("The pizza has been added to the basket");
     }
-    public void checkPizzaAmount(String pizzaAmount){
+
+    public void checkPizzaAmount(String pizzaAmount) {
         WebElement element;
-        try{
+        try {
             element = PageFactory.getDriver().findElement(By.xpath(String.format(pizzaMyButtonCounter, pizzaAmount)));
             Assert.assertEquals("The amount of pizza is not equal to the choosen one", element.getText(), pizzaAmount);
             LOG.info("The amount of chosen items is equal to " + pizzaAmount);
-        }
-        catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new AutotestException("Unable to determine the amount of pizza selected");
         }
     }
+
+    public void addToppings(String toppingName) {
+        String plusXpath = String.format(extraToppingXpath, toppingName) + "/parent::button//i";
+        try {
+            PageFactory.getDriver().findElement(By.xpath(plusXpath))
+                    .click();
+            LOG.info("The topping \"" + toppingName + "\" has been added to the order");
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void checkToppings(String toppingName) {
+        WebElement extraToppingElement = null;
+        try {
+            extraToppingElement = PageFactory.getDriver()
+                    .findElement(By.xpath(String.format(extraToppingXpath, toppingName)));
+            Assert.assertEquals("Values do not match",
+                    toppingName.trim().toLowerCase(),
+                    extraToppingElement.getText());
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
