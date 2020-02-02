@@ -1,18 +1,14 @@
-import io.cucumber.java.Before;
-import io.cucumber.java.After;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
-import ru.tests.BeforeAfterSetup;
 
-@RunWith(Cucumber.class) //inherit Cucumber class from io.cucumber.junit.Cucumber -> "<artifactId>cucumber-java</artifactId>"
+@RunWith(Cucumber.class)
 @CucumberOptions(monochrome = true,
         features = {"src/test/java/ru/tests/features"},
         glue = {"com.main"},
-        tags = {"@test"}
+        tags = {"@addtoppings"}
 )
 
-// class name should end with the word "Test" otherwise it would be launched!
 public class CucumberTest {
 
 }
