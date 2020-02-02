@@ -2,20 +2,21 @@ package com.config;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
 public class PageFactory {
     private static WebDriver driver;
-    // Note - don't use ".exe" for MAC !!!
-    private static String driverPath = "/Users/halilovaelvira/IdeaProjects/MyOwnAE2/src/chromedriver";
-    // private static String driverPath = "/home/elvira/IdeaProject/Utils/chromedriver";
-    public static String website = "https://dodopizza.ru/peterburg";
+    private static String driverPath = "/home/aelya/Загрузки/chromedriver";
+    public static String website = "https://dodopizza.com/oxford/";
+    //  public static String website = "https://dodopizza.ru/petergof/";
 
     public void setUp() {
+        ChromeOptions options = new ChromeOptions();
         System.setProperty("webdriver.chrome.driver", getDriverPath());
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(website);
     }
@@ -28,7 +29,7 @@ public class PageFactory {
         return driverPath;
     }
 
-    public void clearData() {
+    public void quitDriver() {
         driver.quit();
     }
 

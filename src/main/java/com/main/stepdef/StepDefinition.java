@@ -2,22 +2,18 @@ package com.main.stepdef;
 
 import com.main.MainTestClass;
 import com.main.exceptions.AutotestException;
-import com.main.hooks.Hooks;
-import gherkin.ast.DataTable;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
 import java.util.Map;
 
 public class StepDefinition {
    // private WebDriver driver;
-    MainTestClass mainTestClass = PageFactory.initElements(Hooks.driver, MainTestClass.class);
+    MainTestClass mainTestClass = PageFactory.initElements(com.config.PageFactory.getDriver(), MainTestClass.class);
 
     @Given("^some map of values$")
     public void givenMap(Map<String, Integer> map) {
