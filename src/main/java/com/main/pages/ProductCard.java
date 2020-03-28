@@ -19,11 +19,7 @@ public class ProductCard extends WrapperPage {
     public static String productXpath = "//div[contains(@class, 'ProductCard')]//*[contains(text(), '%s')]";
     public static String pizzaMyButtonCounter = myButtonXpath + "/div[@data-quantity='%s']";
     private static String extraToppingXpath = "//span[text()='%s']";
-
-    public ProductCard(WebDriver driver) {
-        super(driver);
-    }
-
+    
     public void checkSizeAndPastry(DataTable dataTable) {
         Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
         dataMap.forEach((k, v) -> {

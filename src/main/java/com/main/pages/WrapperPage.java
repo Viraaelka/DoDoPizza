@@ -18,8 +18,6 @@ import java.util.*;
 public class WrapperPage {
     public static final Logger LOG = LoggerFactory.getLogger(WrapperPage.class);
 
-    private WebDriver driver = PageFactory.getDriver();
-
     public static final String myButtonXpath = "//button[text()='My order']";
 
     @FindBy(xpath = myButtonXpath)
@@ -53,10 +51,6 @@ public class WrapperPage {
 
     public String[] navigationNames = {"Pizza", "Snacks", "Desserts", "Drinks", "Deals", "Store info", "Live"};
 
-    public WrapperPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
     public void chooseCityPage(String cityName) {
         try {
             WebElement cityElement;
@@ -82,29 +76,18 @@ public class WrapperPage {
         }
     }
 
-    public void clickOnNavigationItem(String navigationItemName) {
-        WebElement elementIem;
-        try { // todo -> not finished yet!
-            //    Stream.of(navigationNames).filter(item ->)
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void turnOffCokies() {
-        String cookieBodyXpath = "//div[contains(@class,'cookie-policy')]";
         try {
             Assert.assertTrue("Cookie button is not present on the Home page", isElementPresent(cookieExitButton));
             cookieExitButton.click();
         } catch (NoSuchElementException e) {
-            LOG.error("Cookie button has been not found on the Home page");
+            throw new AutotestException("Cookie button has been not found on the Home page");
         }
-        Assert.assertTrue("Cookie popup is still present on the Home page", isElementNotPresent(cookieBodyXpath));
         LOG.info("We have accepted \"cookies\" terms and conditions and closed the popup message");
     }
 
     public List<WebElement> getList() {
-        return navigationList = driver.findElements(By.xpath("//div[@class='navigation__inner']//li"));
+        return navigationList = PageFactory.getDriver().findElements(By.xpath("//div[@class='navigation__inner']//li"));
     }
 
     public void checkNavigationMenu() {
@@ -132,6 +115,7 @@ public class WrapperPage {
     public void clickToVerifyPage(String pageName, String city) {
         String pageUrl = "";
         WebElement element = null;
+        WebDriver driver = PageFactory.getDriver();
         LOG.info("The social network for testing is " + pageName);
         if (city.equals("Germantown")) {
             switch (pageName) {
@@ -186,9 +170,6 @@ public class WrapperPage {
     public void checkCameraContainer() {
         WebElement element;
         if (getList() != null) {
-            //  element = getList().stream().filter(elem -> elem.getText().equals("Live")).
-            //  element = getList().g
-            // et("List");
             element = PageFactory.getDriver().findElement(By.xpath("//div[@class='navigation__inner']//*[text()='Live']"));
             new Actions(PageFactory.getDriver()).moveToElement(element).build().perform();
             element.click();

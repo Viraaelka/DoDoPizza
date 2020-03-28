@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 public class MainEnglishPageSteps {
     WebDriver driver = PageFactory.getDriver();
-    MainEnglishPage mainEnglishPage = new MainEnglishPage(driver);
+    MainEnglishPage mainEnglishPage = new MainEnglishPage();
 
     @Then("^clicking 'Add To Cart' to choose \"([^\"]*)\" (?:pizza |item |beverage |)at the price \"([^\"]*)\"$")
     public void selectItem(String nameOfItem, String price) {

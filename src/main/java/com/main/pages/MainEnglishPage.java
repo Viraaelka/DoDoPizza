@@ -18,10 +18,6 @@ public class MainEnglishPage extends WrapperPage {
     public static String addToCartXath = "//ancestor::div[contains(@class, 'product__cart')]//button[text()='Add to cart']";
     public static String popUpXpath = "//div[contains(text(),'%s:')]";
 
-    public MainEnglishPage(WebDriver driver) {
-        super(driver);
-    }
-
     public void selectItem(String nameOfItem, String price) {
         try {
             if (!nameOfItem.equals("") && !price.equals("")) {

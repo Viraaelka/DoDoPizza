@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class ChoosePizza { // extends MainTestClass {
 
- /*   public ChoosePizza(WebDriver webdriver) {
-        super(webdriver);
-    } */
 
     @FindBy(xpath = "//div[@class='popup__dialog-inner']//following-sibling::span")
     public WebElement pizzaTitle;
